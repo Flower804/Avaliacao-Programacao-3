@@ -34,6 +34,8 @@ sheet = pygame.image.load("FieldsTileset.png").convert_alpha()
 
 #------ Methods ------
 def Menu():
+    global state
+    global running
     fonte_botoes = pygame.font.Font('Fonte.ttf', 60)
     superficieMenu = pygame.Surface((screen_l, screen_h))
     menuImage = pygame.image.load("MenuImagem.png").convert()
@@ -48,7 +50,8 @@ def Menu():
     #Title missing
     title = fonte.render("Medieval Tower Defense", True, (0,0,0))
     superficieMenu.blit(title, (150, 75))
-   
+    
+    
     Button1 = pygame.draw.rect(superficieMenu, (139, 69, 19), Button1, border_radius= 10)
     Button2 = pygame.draw.rect(superficieMenu, (139, 69, 19), Button2, border_radius= 10)
     Button3 = pygame.draw.rect(superficieMenu, (139, 69, 19), Button3, border_radius = 10)
@@ -60,8 +63,19 @@ def Menu():
     superficieMenu.blit(leave, (Button2.x + 70, Button2.y + 15))
     superficieMenu.blit(settings, (Button3.x + 55, Button3.y + 15))
     
+    mousePosition = pygame.mouse.get_pos()
+       
+    if Button1.collidepoint(mousePosition) and pygame.mouse.get_pressed()[0] == 1:
+            state = "Level1"
+            return state
+    elif Button2.collidepoint(mousePosition) and pygame.mouse.get_pressed()[0] == 1:
+            running = False
+            return running
+    elif Button3.collidepoint(mousePosition) and pygame.mouse.get_pressed()[0] == 1:
+            print("Oi") #Here is the Setting function part that I´ll create if i have time
+        
     screen.blit(superficieMenu, (0,0))
-
+        
 def load_mapa(path):
     with open(path, newline='') as f: #Opens CSV File
         reader = csv.reader(f) #Reads CSV File
@@ -97,7 +111,7 @@ def Level1():
     for y in range(0, game_map_layer0.shape[0]):
         for x in range(game_map_layer0.shape[1]):
             superficie.blit(tiles[int(game_map_layer0[y, x])], (y * tile_size, x * tile_size)) #Draw superficie
-            
+    screen.blit(superficie, (0,0))        
 #------ Game Loop ------
 while running:
     relogio.tick(FPS)
@@ -105,13 +119,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
+    if state == "Menu":
+        Menu()
+    elif state == "Level1":
+        Level1() 
         
-        if state == "Menu":
-            Menu()
-        elif state == "Level1":
-            Level1()
-        
-
     pygame.display.flip()
 pygame.quit()
 sys.exit()
