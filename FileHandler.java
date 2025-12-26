@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Vector;
 
 public class FileHandler {
     String user;
@@ -22,12 +20,12 @@ public class FileHandler {
     //        
     //    }
     //}
-    private static List<String> return_user(){
+    private static Vector<String> return_user(){
         //TODO: make the File path user the working directory so we dont waste a variable plus so we make it stable
         //YK error prone stuff
         //ass: Flower
         File myObj = new File("users.txt");
-        List<String> users = new ArrayList<>();
+        Vector<String> users = new Vector<>();
 
         try (Scanner myReader = new Scanner(myObj)){
             while(myReader.hasNextLine()){
@@ -44,7 +42,7 @@ public class FileHandler {
     }
 
     public static boolean login(String username, String password) {
-        List<String> users = return_user();
+        Vector<String> users = return_user();
 
         for(String userLine : users){
             String[] data = userLine.split(",");
