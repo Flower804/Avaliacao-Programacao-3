@@ -65,4 +65,28 @@ public class FileHandler {
             System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
         }
     }
+
+    public static boolean checkadm(){
+        /*Flower
+            TODO: pretty much everything of this stuff was taken from the read user func
+            maybe we can do smth about it
+        */
+        File myObj = new File("admins.txt");
+        Vector<String> admin = new Vector<>();
+        
+        try(Scanner myReader = new Scanner(myObj)){
+            while(myReader.hasNextLine()){
+                String data = myReader.nextLine();
+                admin.add(data);
+            }
+        }catch (FileNotFoundException flf){
+            System.out.println("!FileHandler!: Error reading file adm: " + e.getMessage());
+        }
+
+        if(admin.isEmpty()){
+            return true; //the vector is empty
+        } else {
+            return false;
+        }
+    }
 }
