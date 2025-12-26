@@ -26,5 +26,10 @@ public class Users {
     public void setEmail(String aEmail){
         email = aEmail;
     }
-    // Acho que não se pode alterar o tipo, apenas admins podem.
+    //Rodr: Acho que não se pode alterar o tipo, apenas admins podem.
+    //Flower: idk
+
+    public String toFileString() { //Flower: this is super insecure so.....
+        return username + "," + password;
+    }
 }

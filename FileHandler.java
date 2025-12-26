@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -21,23 +22,49 @@ public class FileHandler {
     //        
     //    }
     //}
-    private List<String> return_user(){
+    private static List<String> return_user(){
         //TODO: make the File path user the working directory so we dont waste a variable plus so we make it stable
         //YK error prone stuff
         //ass: Flower
-        File myObj = new File("emails.txt");
-        List<String> emails = new ArrayList<>();
+        File myObj = new File("users.txt");
+        List<String> users = new ArrayList<>();
 
         try (Scanner myReader = new Scanner(myObj)){
             while(myReader.hasNextLine()){
                 String data = myReader.nextLine();
-                emails.add(data);
+                users.add(data);
             }
 
-            return emails;
         } catch(FileNotFoundException fnf){
-            System.out.print("!return_emails!: an error has occured: ");
+            System.out.print("!FileHandler!: an error has occured: ");
             System.out.print(fnf);
+        }
+
+        return users;
+    }
+
+    public static boolean login(String username, String password) {
+        List<String> users = return_user();
+
+        for(String userLine : users){
+            String[] data = userLine.split(",");
+
+            String fileUsername = data[0];
+            String filePassword = data[1];
+            
+            if(fileUsername.equals(username) && filePassword.equals(password)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void saveUser(Users user){
+        try(FileWriter writer = new FileWriter("users.txt", true)){
+            writer.write(user.toFileString() + "\n");
+        } catch(IOException e){
+            System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
         }
     }
 }

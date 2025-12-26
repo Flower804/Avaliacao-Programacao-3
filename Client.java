@@ -10,6 +10,6 @@ public class Client extends Users{
         NIF = aNIF;
         cellPhone = aCellPhone;
         household = aHousehold;
-     }
-     
     }
+     
+}
