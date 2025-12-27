@@ -57,6 +57,9 @@ public class FileHandler {
 
         return false;
     }
+/* Flower
+    TODO: can turn this two functions into one
+===============================================================================================*/
 
     public static void saveUser(Users user){
         try(FileWriter writer = new FileWriter("users.txt", true)){
@@ -65,6 +68,16 @@ public class FileHandler {
             System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
         }
     }
+
+    public static void saveAdm(Users user){
+        try(FileWriter writer = new FileWriter("admin.txt", true)){
+            writer.write(user.toFileString() + "\n");
+        } catch(IOException e){
+            System.out.println("!FileHandler!: Error saving admin: " + e.getMessage());
+        }
+    }
+    
+//=============================================================================================
 
     public static boolean checkadm(){
         /*Flower
