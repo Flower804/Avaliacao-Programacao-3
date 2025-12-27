@@ -14,7 +14,7 @@ public class Admin extends Users{
     }
 
     public static void create_admin(){
-        Users admin = new Users();
+        Users admin = new Users("no_ussername", "no_password", "no_name", false, "admin");
         Scanner input = new Scanner(System.in);
     
         System.out.println("Please insert the username of the admin: ");
@@ -26,5 +26,7 @@ public class Admin extends Users{
         admin.setUsermame(username);
         admin.setPassword(password);
         FileHandler.saveAdm(admin);
+
+        input.close();
     }
 }

@@ -51,7 +51,7 @@ public class Main {
         */
         Scanner input = new Scanner(System.in);
         //FileHandler fileHandler = new FileHandler();
-        Users user = new Users();
+        Users user = new Users("no_ussername", "no_password", "no_name", false, "user");
 
         /*Flower
             TODO: theres this little errors but it works + part of this code is repeated from the loggin, maybe we can do smth about this
