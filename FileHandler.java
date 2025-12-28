@@ -14,8 +14,8 @@ public class FileHandler {
     String user;
     String password;
 
-    Path s = Paths.get("");
-    String user_path = s.toString() ;
+    private static Path s = Paths.get("");
+    private static String user_path = s.toString() ;
 
     //private void ReadFileList(){
     //    try{
@@ -72,9 +72,12 @@ public class FileHandler {
     }
 
     public static void saveAdm(Users user){
-        try(FileWriter writer = new FileWriter("admin.txt", true)){
-            writer.write(user.toFileString() + "\n");
-        } catch(IOException e){
+        //try(FileWriter writer = new FileWriter(user_path + "/Documents/admins.txt", true)){
+	try(FileWriter writer = new FileWriter("trabalhoprog/Documents/admins.txt", true)){
+    		    System.out.println(user.toFileString());
+
+		writer.write(user.toFileString() + "\n"); 	
+	} catch(IOException e){
             System.out.println("!FileHandler!: Error saving admin: " + e.getMessage());
         }
     }
@@ -86,7 +89,7 @@ public class FileHandler {
             TODO: pretty much everything of this stuff was taken from the read user func
             maybe we can do smth about it
         */
-        File myObj = new File("admins.txt");
+        File myObj = new File("trabalhoprog/Documents/admins.txt");
         Vector<String> admin = new Vector<>();
         
         try(Scanner myReader = new Scanner(myObj)){
