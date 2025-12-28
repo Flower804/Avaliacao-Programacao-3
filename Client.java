@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 import java.util.logging.Handler;
 
 public class Client extends Users{

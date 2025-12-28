@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,7 +95,7 @@ public class FileHandler {
                 admin.add(data);
             }
         }catch (FileNotFoundException flf){
-            System.out.println("!FileHandler!: Error reading file adm: " + e.getMessage());
+            System.out.println("!FileHandler!: Error reading file adm: " + flf.getMessage());
         }
 
         if(admin.isEmpty()){

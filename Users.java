@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 //RF3, 
 public class Users {
     private String username;
@@ -31,5 +33,9 @@ public class Users {
 
     public String toFileString() { //Flower: this is super insecure so.....
         return username + "," + password;
+    }
+
+    public String return_user(){
+    	return username;
     }
 }

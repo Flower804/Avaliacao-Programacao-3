@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 public class Technical extends Users{
     private int NIF;
     private int cellPhone;

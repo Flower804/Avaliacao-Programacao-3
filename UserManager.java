@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 public class UserManager {
     
 
