@@ -17,7 +17,7 @@ public class Main {
             if(choice == 1){
                 login();
             } else if(choice == 2){
-
+		Sign_up();
             }
 
             input.close();
@@ -49,7 +49,7 @@ public class Main {
            // System.out.println("The loggin was succesfull");
 	   //Flower:try to find out why not working later
 	   //System.out.println("Bem-vindo" + Users.return_user);
-        	System.out.println("Bem vindo" + username);
+        	System.out.println("Bem vindo " + username);
 	} else {
             System.out.println("The loggin was not succesfull");
         }
@@ -57,7 +57,7 @@ public class Main {
         input.close();
     }
 
-    private static void Sign_in(){
+    private static void Sign_up(){
         /*FLower
             TODO: pass this to user class
         */

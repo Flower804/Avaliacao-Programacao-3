@@ -13,20 +13,20 @@ import java.util.Vector;
 public class FileHandler {
     String user;
     String password;
-
+//Flower: see if this is really necessary to be here, need to test on other devices after
+//pathes suck
+//=========================================================
     private static Path s = Paths.get("");
     private static String user_path = s.toString() ;
 
-    //private void ReadFileList(){
-    //    try{
-    //        
-    //    }
-    //}
+    //FLower: how the hell is this diferent from like 6 lines bellow????????
+    //private String path_users = "trabalhoprog/Documents/users.txt";
+
+//========================================================
     private static Vector<String> return_user(){
-        //TODO: make the File path user the working directory so we dont waste a variable plus so we make it stable
         //YK error prone stuff
         //ass: Flower
-        File myObj = new File("users.txt");
+        File myObj = new File("trabalhoprog/Documents/users.txt");
         Vector<String> users = new Vector<>();
 
         try (Scanner myReader = new Scanner(myObj)){
@@ -65,9 +65,10 @@ public class FileHandler {
 ===============================================================================================*/
 
     public static void saveUser(Users user){
-        try(FileWriter writer = new FileWriter("users.txt", true)){
+        try(FileWriter writer = new FileWriter("trabalhoprog/Documents/users.txt", true)){
             writer.write(user.toFileString() + "\n");
         } catch(IOException e){
+		System.out.println("Working directory: " + System.getProperty("user.dir"));
             System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
         }
     }
