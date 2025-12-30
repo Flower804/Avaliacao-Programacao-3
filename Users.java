@@ -15,7 +15,7 @@ public class Users {
         name = aName;
         state = aState;
         type = aType;
-    }
+	}    
     public void setUsermame(String aUsername){
         username = aUsername;
     }

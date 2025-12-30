@@ -4,7 +4,11 @@ import java.util.Scanner;
 public class Main {
 	
     public static void main(String[] args){
-        if(!FileHandler.checkadm()){
+        //Flower: debugging things
+	System.out.println("Working directory: " + System.getProperty("user.dir"));
+
+	    
+	if(!FileHandler.checkadm()){
             Scanner input = new Scanner(System.in);
 
             System.out.println("Please choose what you want to do: " + "\n" + "1- loggin" + "\n" + "2- Sign in");
@@ -20,7 +24,8 @@ public class Main {
         } else {
             System.out.println("No admin found please create on adm");
             //Flower
-            //TODO: create a create adm function 
+            //TODO: create a create adm function
+		Admin.create_admin();
         }
     }
 

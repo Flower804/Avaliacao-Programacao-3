@@ -3,7 +3,7 @@ package trabalhoprog;
 import java.util.Scanner;
 
 public class Admin extends Users{
-    public Admin(String aUsername, String aPassword, String aName, Boolean aState, String aType) {
+    public Admin(String aUsername, String aPassword, String aName, Boolean aState, String aType){
         super(aUsername, aPassword, aName, aState, aType);
     }
     

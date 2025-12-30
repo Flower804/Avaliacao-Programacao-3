@@ -61,6 +61,7 @@ public class FileHandler {
     }
 /* Flower
     TODO: can turn this two functions into one
+	TODO: fix the file location finding thingy	
 ===============================================================================================*/
 
     public static void saveUser(Users user){
@@ -88,6 +89,7 @@ public class FileHandler {
         /*Flower
             TODO: pretty much everything of this stuff was taken from the read user func
             maybe we can do smth about it
+Todo: fix the file location finder thing here
         */
         File myObj = new File("trabalhoprog/Documents/admins.txt");
         Vector<String> admin = new Vector<>();
