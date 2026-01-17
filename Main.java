@@ -2,7 +2,7 @@ package trabalhoprog;  //Flower this is the name of the directory where I'm runn
 import java.util.Scanner;
 
 public class Main {
-	private static Users user = new Users("no_ussername", "no_password", "no_name", true, "not_defined"); 
+  static Users user = new Users("no_ussername", "no_password", "no_name", true, "not_defined"); 
 
   public static void main(String[] args){
     //Flower: debugging things
@@ -54,17 +54,37 @@ public class Main {
     String password = input.nextLine();
 
     if(FileHandler.login(username, password)){
-      // System.out.println("The loggin was succesfull");
-	    //Flower:try to find out why not working later
-	    //System.out.println("Bem-vindo" + Users.return_user);
       System.out.println("Bem vindo " + username);
-      user.setUsermame(username);
-      user.setPassword(password);
+      
+      FileHandler.loadUser(user);
+
+      switch(user.type){
+        case("adm"):
+          admin_loop();
+          break;
+        case("clients"):
+          user_loop();
+          break;
+        case("technical"):
+          break;
+      }
 	  } else {
       System.out.println("The loggin was not succesfull");
     }
 
     input.close();
+  }
+  
+  private static void user_loop(){
+
+  }
+
+  private static void admin_loop(){
+    Admin current = new Admin(user);
+    while(true){
+      System.out.println("what would you like to do?");
+
+    }
   }
 
   private static void Sign_up(){
@@ -85,7 +105,7 @@ public class Main {
     System.out.println("Please insert your password: ");
     String password = input.nextLine();
 
-    user.setUsermame(username);
+    user.setUsername(username);
     user.setPassword(password);
     FileHandler.saveUser(user);
   }

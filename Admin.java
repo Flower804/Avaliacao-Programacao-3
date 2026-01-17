@@ -3,8 +3,8 @@ package trabalhoprog;
 import java.util.Scanner;
 
 public class Admin extends Users{
-    public Admin(String aUsername, String aPassword, String aName, Boolean aState, String aType){
-        super(aUsername, aPassword, aName, aState, aType);
+    public Admin(Users user){
+        super(user.username, user.password, user.name, user.state, user.type);
     }
     
     public boolean setType(String aType, String aUsername){
@@ -25,10 +25,12 @@ public class Admin extends Users{
         System.out.println("Please insert the password for the admin: ");
         String password = input.nextLine();
 
-        admin.setUsermame(username);
+        admin.setUsername(username);
         admin.setPassword(password);
         FileHandler.saveAdm(admin);
 
         input.close();
     }
+
+
 }
