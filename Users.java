@@ -1,6 +1,8 @@
 package trabalhoprog;
 
-//RF3, 
+//RF3,
+//
+//Flower: honestly I'm not sure if we need the name and state
 public class Users {
     private String username;
     protected String password;
@@ -29,7 +31,10 @@ public class Users {
         email = aEmail;
     }
     //Rodr: Acho que não se pode alterar o tipo, apenas admins podem.
-    //Flower: idk
+    //Flower: I need it so gonna create it 
+    public void setType(String atype){
+      type = atype;
+    }
 
     public String toFileString() { //Flower: this is super insecure so.....
         return username + "," + password;
