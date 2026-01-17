@@ -11,8 +11,9 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class FileHandler {
-    private String user;
-    private String password;
+    private static String fileUsername;
+    private static String filePassword;
+    private static String fileuser_type;
     //Flower: see if this is really necessary to be here, need to test on other devices after
     //paths suck
 //=========================================================
@@ -43,6 +44,12 @@ public class FileHandler {
 
         return users;
     }
+  
+    public static void loadUser(Users user){
+      user.setUsername(fileUsername);
+      user.setPassword(filePassword);
+      user.setType(fileuser_type);
+    }
 
     public static boolean login(String username, String password) {
         Vector<String> users = return_user();
@@ -50,9 +57,10 @@ public class FileHandler {
         for(String userLine : users){
             String[] data = userLine.split(",");
 
-            String fileUsername = data[0];
-            String filePassword = data[1];
-            
+            fileUsername = data[0];
+            filePassword = data[1];
+            fileuser_type = data[2];
+
             if(fileUsername.equals(username) && filePassword.equals(password)) {
               //Users user = new Users(username, password, username, true, "cliente");  
               return true;

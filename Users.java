@@ -4,10 +4,10 @@ package trabalhoprog;
 //
 //Flower: honestly I'm not sure if we need the name and state
 public class Users {
-    private String username;
+    protected String username;
     protected String password;
     protected String name; 
-    private String email;
+    protected String email;
     protected boolean state; //(online/offline)
     protected String type; //(adm/clients/technical)
      
@@ -18,7 +18,7 @@ public class Users {
         state = aState;
         type = aType;
 	}    
-    public void setUsermame(String aUsername){
+    public void setUsername(String aUsername){
         username = aUsername;
     }
     public void setPassword(String aPassword){
@@ -37,10 +37,14 @@ public class Users {
     }
 
     public String toFileString() { //Flower: this is super insecure so.....
-        return username + "," + password;
+        return username + "," + password + ',' + type;
     }
 
     public String return_user(){
     	return username;
+    }
+
+    public String return_type(){
+      return type;
     }
 }
