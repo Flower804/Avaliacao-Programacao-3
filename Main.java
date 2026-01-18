@@ -58,11 +58,11 @@ public class Main {
       
       FileHandler.loadUser(user);
 
-      switch(user.type){
+      switch((user.return_type()).trim()){
         case("adm"):
           admin_loop();
           break;
-        case("clients"):
+        case("clientes"):
           user_loop();
           break;
         case("technical"):
@@ -76,13 +76,28 @@ public class Main {
   }
   
   private static void user_loop(){
-
+    System.out.println("on clients loop");
   }
 
   private static void admin_loop(){
     Admin current = new Admin(user);
-    while(true){
-      System.out.println("what would you like to do?");
+    
+    boolean current_run = true; 
+    while(current_run){
+      int choice;
+      Scanner input = new Scanner(System.in);
+
+      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- exit");
+      choice = input.nextInt();
+
+      switch(choice){
+        case(1):
+          current.seeSignUpRequests();
+          break;
+        case(2):
+          current_run = false;
+          break;
+      }
 
     }
   }
@@ -107,7 +122,7 @@ public class Main {
 
     user.setUsername(username);
     user.setPassword(password);
-    FileHandler.saveUser(user);
+    FileHandler.doUserRequest(user);
   }
 
 }

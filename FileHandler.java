@@ -69,6 +69,50 @@ public class FileHandler {
 
         return false;
     }
+
+    public static void doUserRequest(Users user){
+      try(FileWriter writer = new FileWriter("trabalhoprog/Documents/userrequests.txt", true)){
+        writer.write(user.toFileString() + "\n");
+      } catch(IOException e){
+		    System.out.println("Working directory: " + System.getProperty("user.dir"));
+        System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
+      }
+    }
+
+    public static Vector<String> return_userrequests(){
+      File myObj = new File("trabalhoprog/Documents/userrequests.txt");
+      Vector<String> users = new Vector<>();
+
+      try (Scanner myReader = new Scanner(myObj)){
+        while(myReader.hasNextLine()){
+          String data = myReader.nextLine();
+          users.add(data);
+        }
+      } catch(FileNotFoundException fnf){
+          System.out.print("!FileHandler!: an error has occured: ");
+          System.out.print(fnf);
+      }
+
+      return users;
+    }
+
+    public static void removeUser(int index){
+      try{
+        Vector<String> users = return_userrequests();
+        users.remove(index);
+        
+        FileWriter writer = new FileWriter("trabalhoprog/Documents/userrequests.txt");
+        for(String line : users){
+          writer.write(users + "\n");
+        }
+        writer.close();
+      } catch(FileNotFoundException fnf){
+        System.out.println("!FileNotFouind!");
+        System.out.println(fnf);
+      } catch(IOException io){
+        System.out.println(io);
+      }
+    }
 /* Flower
  * %TEMP FIX%
  *  TODO: can turn this two functions into one
@@ -83,11 +127,12 @@ public class FileHandler {
 		        System.out.println("Working directory: " + System.getProperty("user.dir"));
             System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
         }
+        System.out.println("utilizador aprovado com sucesso");
     }
 
     public static void saveAdm(Users user){
       //try(FileWriter writer = new FileWriter(user_path + "/Documents/admins.txt", true)){
-	    try(FileWriter writer = new FileWriter("trabalhoprog/Documents/admins.txt", true)){
+	    try(FileWriter writer = new FileWriter("trabalhoprog/Documents/users.txt", true)){
     		System.out.println(user.toFileString());
 
 		    writer.write(user.toFileString() + "\n"); 	
@@ -99,27 +144,16 @@ public class FileHandler {
 //=============================================================================================
 
     public static boolean checkadm(){
-      /*Flower
-          TODO: pretty much everything of this stuff was taken from the read user func
-          maybe we can do smth about it
-      Todo: fix the file location finder thing here
-      */
-      File myObj = new File("trabalhoprog/Documents/admins.txt");
-      Vector<String> admin = new Vector<>();
+      Vector<String> users = return_user();
+      for(String userLine : users){
+        String[] data = userLine.split(",");
         
-      try(Scanner myReader = new Scanner(myObj)){
-        while(myReader.hasNextLine()){
-          String data = myReader.nextLine();
-          admin.add(data);
-        }
-      }catch (FileNotFoundException flf){
-        System.out.println("!FileHandler!: Error reading file adm: " + flf.getMessage());
-      }
+        System.out.println(data);
 
-      if(admin.isEmpty()){
-        return true; //the vector is empty
-      } else {
-        return false;
+        if(data[2].equals("adm")){
+          return false;
+        }
       }
+      return true; //either the file is empty or theres no adm
     }
 }
