@@ -54,4 +54,25 @@ public class Admin extends Users{
     FileHandler.saveUser(user_to_accept);
     FileHandler.removeUser(choice);
   } 
+
+  public static void associateTecnitians(){
+    Scanner choice = new Scanner(System.in);
+    System.out.println("Escolhe um tecnico");
+    Vector<String> tecnicos = FileHandler.return_tecnicos();
+    int choice_tecntitian = choice.nextInt();
+    
+    String[] tecnical_choice = (tecnicos.get(choice_tecntitian)).split(",");
+
+    Technical tecnico = new Technical(tecnical_choice[0], tecnical_choice[1], "no_name", false, tecnical_choice[2], 123, 456, "no_adress");
+    
+    System.out.println("Escolha um servico para assoiar o tecnico");
+    Vector<String> services = FileHandler.return_services();
+    int choice_service = choice.nextInt();
+
+    String[] service_choice = (services.get(choice_service)).split(",");
+    Services serviso = new Services(123, 4, "aproved");
+    serviso.set_Tecnico(tecnico);
+
+    //TODO: make a function to update re-write the service's data on the services txt file with the new tecnico
+  }
 }

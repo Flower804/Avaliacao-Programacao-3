@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 /*
 RF19:
 Rodrigo Gonçalves
@@ -12,6 +14,8 @@ public class Services{
     private String state; //RG: Awaits approval/ Aproved / Concluded 
     private Date dateBeggin; //RG:  This date is the date when service beggin
     private Date conclusionDate; //RG: This date is the service completion date
+    private Technical tecnico_responsavel;
+
 
     public Services(int aCode, float aTotal, String aState){
         code = aCode;
@@ -22,6 +26,10 @@ public class Services{
         analysesList = new Vector<>();
     }
     
+    public void set_Tecnico(Technical tecnico){
+      tecnico_responsavel = tecnico; 
+    }
+
     public void setState(String aState){
         state = aState;
     }

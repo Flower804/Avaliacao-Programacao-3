@@ -65,7 +65,7 @@ public class Main {
         case("clientes"):
           user_loop();
           break;
-        case("technical"):
+        case("Tecnico"):
           break;
       }
 	  } else {
@@ -87,7 +87,7 @@ public class Main {
       int choice;
       Scanner input = new Scanner(System.in);
 
-      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- exit");
+      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- associar Tecnico a Servico" + "\n" + "9- exit");
       choice = input.nextInt();
 
       switch(choice){
@@ -95,6 +95,9 @@ public class Main {
           current.seeSignUpRequests();
           break;
         case(2):
+          current.associateTecnitians();
+          break;
+        case(9):
           current_run = false;
           break;
       }

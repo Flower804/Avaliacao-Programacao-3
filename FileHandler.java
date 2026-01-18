@@ -14,6 +14,7 @@ public class FileHandler {
     private static String fileUsername;
     private static String filePassword;
     private static String fileuser_type;
+    private static Vector<String> tecnicos = new Vector<>(); 
     //Flower: see if this is really necessary to be here, need to test on other devices after
     //paths suck
 //=========================================================
@@ -104,6 +105,57 @@ public class FileHandler {
         FileWriter writer = new FileWriter("trabalhoprog/Documents/userrequests.txt");
         for(String line : users){
           writer.write(users + "\n");
+        }
+        writer.close();
+      } catch(FileNotFoundException fnf){
+        System.out.println("!FileNotFouind!");
+        System.out.println(fnf);
+      } catch(IOException io){
+        System.out.println(io);
+      }
+    }
+
+    public static Vector<String> return_tecnicos(){
+      Vector<String> users = return_user();
+      int index = 0;
+
+      for(int i = 0; i < users.size(); i++){
+        String userLine = users.get(i);
+        String[] data = userLine.split(",");
+
+        if(data[2].equals("Tecnico")){
+          tecnicos.add(userLine);
+          System.out.println("0- " + "nome: " + data[0]);
+        }
+      }
+      return tecnicos;
+    }
+
+    public static Vector<String> return_services(){
+     File myObj = new File("trabalhoprog/Documents/services.txt");
+      Vector<String> services = new Vector<>();
+
+      try (Scanner myReader = new Scanner(myObj)){
+        while(myReader.hasNextLine()){
+          String data = myReader.nextLine();
+          services.add(data);
+        }
+      } catch(FileNotFoundException fnf){
+          System.out.print("!FileHandler!: an error has occured: ");
+          System.out.print(fnf);
+      }
+
+      return services;
+    }
+
+    public static void remove_service(int index){
+      try{
+        Vector<String> services = return_services();
+        service.remove(index);
+        
+        FileWriter writer = new FileWriter("trabalhoprog/Documents/services.txt");
+        for(String line : services){
+          writer.write(line + "\n");
         }
         writer.close();
       } catch(FileNotFoundException fnf){
