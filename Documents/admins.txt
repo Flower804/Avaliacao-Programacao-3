@@ -1,2 +1,0 @@
-alguem,algo
-algo,algem
