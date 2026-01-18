@@ -1,6 +1,7 @@
 package trabalhoprog;
 
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Admin extends Users{
     public Admin(Users user){
@@ -16,7 +17,7 @@ public class Admin extends Users{
     }
 
     public static void create_admin(){
-        Users admin = new Users("no_ussername", "no_password", "no_name", false, "admin");
+        Users admin = new Users("no_ussername", "no_password", "no_name", false, "adm");
         Scanner input = new Scanner(System.in);
     
         System.out.println("Please insert the username of the admin: ");
@@ -31,6 +32,26 @@ public class Admin extends Users{
 
         input.close();
     }
+  
+  public static void seeSignUpRequests(){
+    //read file of SIgnUpRequests
+    //numerate them and send them
+    Vector<String> current_requests = FileHandler.return_userrequests();
+    for(int i = 0; i < current_requests.size(); i++){
+      String request = current_requests.get(i); 
+      String[] data = request.split(",");
+      System.out.println("request " + i + "- name: " + data[0] + " password: " + data[1]);
+    }
+    
+    Scanner reader = new Scanner(System.in);
+    System.out.println("que utilizador quer aprovar");
+    int choice = reader.nextInt();
+    
+    String request_to_accept = current_requests.get(choice);
+    String data[] = request_to_accept.split(",");
 
-
+    Users user_to_accept = new Users(data[0], data[1], "no_name", false, data[2]);
+    FileHandler.saveUser(user_to_accept);
+    FileHandler.removeUser(choice);
+  } 
 }
