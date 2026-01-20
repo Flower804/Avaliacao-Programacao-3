@@ -2,7 +2,7 @@ package trabalhoprog;
 
 //RF3,
 //
-//Flower: honestly I'm not sure if we need the name and state
+
 public class Users {
     protected String username;
     protected String password;
@@ -10,14 +10,15 @@ public class Users {
     protected String email;
     protected boolean state; //(online/offline)
     protected String type; //(adm/clients/technical)
-     
+    
     public Users(String aUsername, String aPassword, String aName, Boolean aState, String aType){
         username = aUsername;
         password = aPassword;
         name = aName;
         state = aState;
         type = aType;
-	}    
+	  } 
+
     public void setUsername(String aUsername){
         username = aUsername;
     }

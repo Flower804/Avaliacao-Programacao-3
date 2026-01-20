@@ -10,6 +10,12 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.Vector;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class FileHandler {
     private static String fileUsername;
     private static String filePassword;
@@ -18,18 +24,46 @@ public class FileHandler {
     //Flower: see if this is really necessary to be here, need to test on other devices after
     //paths suck
 //=========================================================
-    private static Path s = Paths.get("").toAbsolutePath();
-    private static String user_path = s.toString() ;
-    
-    //Flower: how the hell is this diferent from like 6 lines bellow????????
-    //private String path_users = "trabalhoprog/Documents/users.txt";
+    private static String path_credencias = "trabalhoprog/Documents/credencias_acesso.txt";
 
+    private static String path_data = "trabalhoprog/Documents/dados_apl.data";
 //========================================================
+
+    public static dados load_data_file(){
+      try{
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(path_data));
+
+        dados data = (dados) in.readObject();
+        in.close();
+
+        return data;
+      } catch (FileNotFoundException flf) {
+        System.out.println("ficheiro de dados nao conseguiu ser carregado");
+      } catch (IOException ioe) {
+        System.out.println("ficheiro de dados nao conseguiu ser carregado");
+      } catch (ClassNotFoundException cln){
+        System.out.println("ficheiro de dados nao conseguiu ser carregado");
+      } 
+      /*catch (EOFException eof) {
+        //TODO: create an admin 
+      }*/
+      return new dados();
+    }
+
+    public static void save_data(dados data){
+      try{
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path_data));
+
+        out.writeObject(data);
+        out.close();
+      } catch (IOException ioe){
+        System.out.println("ups");
+      }
+    }
+    
+
     private static Vector<String> return_user(){
-        //YK error prone stuff
-        //ass: Flower
-	//System.out.println("!DEBUG!: " +  path_user);
-        File myObj = new File("trabalhoprog/Documents/users.txt");
+        File myObj = new File(path_credencias);
         Vector<String> users = new Vector<>();
 
         try (Scanner myReader = new Scanner(myObj)){
@@ -45,12 +79,6 @@ public class FileHandler {
 
         return users;
     }
-  
-    public static void loadUser(Users user){
-      user.setUsername(fileUsername);
-      user.setPassword(filePassword);
-      user.setType(fileuser_type);
-    }
 
     public static boolean login(String username, String password) {
         Vector<String> users = return_user();
@@ -60,10 +88,8 @@ public class FileHandler {
 
             fileUsername = data[0];
             filePassword = data[1];
-            fileuser_type = data[2];
 
-            if(fileUsername.equals(username) && filePassword.equals(password)) {
-              //Users user = new Users(username, password, username, true, "cliente");  
+            if(fileUsername.equals(username) && filePassword.equals(password)) {  
               return true;
             }
         }
@@ -77,6 +103,14 @@ public class FileHandler {
       } catch(IOException e){
 		    System.out.println("Working directory: " + System.getProperty("user.dir"));
         System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
+      }
+    }
+
+    public void saveCredentials(String username, String password){
+      try(FileWriter writer = new FileWriter(path_credencias, true)){
+        writer.writer(username + "," + password + "\n");
+      }catch(IOException e){
+        System.out.println("error writing credentials to the cretentials file");
       }
     }
 
@@ -147,11 +181,20 @@ public class FileHandler {
 
       return services;
     }
+    
+    public static void addService(Services service){
+      try(FileWriter writer = new FileWriter("trabalhoprog/Documents/services.txt", true)){
+        writer.write(service.toFileString() + "\n");
+      } catch(IOException e){
+		    System.out.println("Working directory: " + System.getProperty("user.dir"));
+        System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
+      }
+    }
 
     public static void remove_service(int index){
       try{
         Vector<String> services = return_services();
-        service.remove(index);
+        services.remove(index);
         
         FileWriter writer = new FileWriter("trabalhoprog/Documents/services.txt");
         for(String line : services){
@@ -165,47 +208,5 @@ public class FileHandler {
         System.out.println(io);
       }
     }
-/* Flower
- * %TEMP FIX%
- *  TODO: can turn this two functions into one
- *  will probably do this more to the end of the work
- *	TODO: fix the file location finding thingy	
-===============================================================================================*/
-
-    public static void saveUser(Users user){
-        try(FileWriter writer = new FileWriter("trabalhoprog/Documents/users.txt", true)){
-            writer.write(user.toFileString() + "\n");
-        } catch(IOException e){
-		        System.out.println("Working directory: " + System.getProperty("user.dir"));
-            System.out.println("!FileHandler!: Error saving user: " + e.getMessage());
-        }
-        System.out.println("utilizador aprovado com sucesso");
-    }
-
-    public static void saveAdm(Users user){
-      //try(FileWriter writer = new FileWriter(user_path + "/Documents/admins.txt", true)){
-	    try(FileWriter writer = new FileWriter("trabalhoprog/Documents/users.txt", true)){
-    		System.out.println(user.toFileString());
-
-		    writer.write(user.toFileString() + "\n"); 	
-	    } catch(IOException e){
-        System.out.println("!FileHandler!: Error saving admin: " + e.getMessage());
-      }
-    }
     
-//=============================================================================================
-
-    public static boolean checkadm(){
-      Vector<String> users = return_user();
-      for(String userLine : users){
-        String[] data = userLine.split(",");
-        
-        System.out.println(data);
-
-        if(data[2].equals("adm")){
-          return false;
-        }
-      }
-      return true; //either the file is empty or theres no adm
-    }
 }

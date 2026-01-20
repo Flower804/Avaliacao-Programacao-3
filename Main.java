@@ -4,31 +4,24 @@ import java.util.Scanner;
 public class Main {
   static Users user = new Users("no_ussername", "no_password", "no_name", true, "not_defined"); 
 
+  dados data = new Dados();
+
   public static void main(String[] args){
     //Flower: debugging things
 	  System.out.println("Working directory: " + System.getProperty("user.dir"));
-
-	    
-	  if(!FileHandler.checkadm()){
-      Scanner input = new Scanner(System.in);
-
-      System.out.println("Please choose what you want to do: " + "\n" + "1- loggin" + "\n" + "2- Sign in");
-      int choice = input.nextInt();
-
-      if(choice == 1){
-        login();
-      } else if(choice == 2){
-		    Sign_up();
-      }
-
-      input.close();
-
-      on_exit();
+      
+    data = FileHandler.load_data_file();
+	  
+    if(data.return_user_n() == 0){
+      //there were no users created
+      System.out.println("Nao foram encontrados utilizadores, por favor crie um utilizador administrador");
+      Admin.create_admin(data);
+      //TODO: should we just pass to the adm loop or??
+      //admin_loop(Admin.create_admin(data));
     } else {
-      System.out.println("No admin found please create on adm");
-      //Flower
-      //TODO: create a create adm function
-		  Admin.create_admin();
+      //Users were found
+      //procede as normal
+      login();
     }
   }
 
@@ -56,18 +49,21 @@ public class Main {
     if(FileHandler.login(username, password)){
       System.out.println("Bem vindo " + username);
       
-      FileHandler.loadUser(user);
+      Users user = dados.return_user(username, password);
+      if(user.return_type().equals("adm")){
+        Admin admin = (Admin) user; //trust me bro
+        admin_loop(admin);
 
-      switch((user.return_type()).trim()){
-        case("adm"):
-          admin_loop();
-          break;
-        case("clientes"):
-          user_loop();
-          break;
-        case("Tecnico"):
-          break;
+      }else if(user.return_type().equals("clients")){
+        Client client = (Client) user;
+        user_loop(client);
+
+      }else if(user.return_type().equals("tecnico")){
+        Thechnical tecnico = (Thechnical) user;
+        //TODO: finish this section
+        //
       }
+
 	  } else {
       System.out.println("The loggin was not succesfull");
     }
@@ -75,13 +71,11 @@ public class Main {
     input.close();
   }
   
-  private static void user_loop(){
+  private static void user_loop(Client current){
     System.out.println("on clients loop");
   }
 
-  private static void admin_loop(){
-    Admin current = new Admin(user);
-    
+  private static void admin_loop(Admin current){
     boolean current_run = true; 
     while(current_run){
       int choice;

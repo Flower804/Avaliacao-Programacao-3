@@ -16,21 +16,28 @@ public class Admin extends Users{
         return false;
     }
 
-    public static void create_admin(){
-        Users admin = new Users("no_ussername", "no_password", "no_name", false, "adm");
-        Scanner input = new Scanner(System.in);
-    
-        System.out.println("Please insert the username of the admin: ");
-        String username = input.nextLine();
+    public static void create_admin(dados data){
+      Scanner input = new Scanner(System.in);
 
-        System.out.println("Please insert the password for the admin: ");
-        String password = input.nextLine();
+      System.out.println("Por favor insira o nome");
+      String username = input.nextLine();
 
-        admin.setUsername(username);
-        admin.setPassword(password);
-        FileHandler.saveAdm(admin);
+      System.out.println("Por favor insira a password");
+      String password = input.nextLine();
 
-        input.close();
+      //TODO: finish the admin creation process
+      
+      String nome = "nome";
+      Boolean estado = true;
+
+      //=====================
+      String type = "admin";
+      //==========================
+      Users user = new Users(username, password, nome, estado, type);  
+      Admin admin = new Admin(user);
+      data.add_User(admin);
+      FileHandler.saveCredentials(username, password);
+      //return admin;
     }
   
   public static void seeSignUpRequests(){
@@ -72,7 +79,9 @@ public class Admin extends Users{
     String[] service_choice = (services.get(choice_service)).split(",");
     Services serviso = new Services(123, 4, "aproved");
     serviso.set_Tecnico(tecnico);
-
+    
+    FileHandler.remove_service(choice_service);
+    FileHandler.addService(serviso);
     //TODO: make a function to update re-write the service's data on the services txt file with the new tecnico
   }
 }
