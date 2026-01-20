@@ -45,8 +45,8 @@ public class Client extends Users{
 
     Client client = new Client(username, password, nome, estado, type, NIF, numero_tele, morada);
     
-    //TODO: add the pedido de registo thingy
-    data.add_User(client);
-    FileHandler.saveCredentials(username, password);
+    data.make_request(client);
+    //data.add_User(client);
+    //FileHandler.saveCredentials(username, password);
   }
 }

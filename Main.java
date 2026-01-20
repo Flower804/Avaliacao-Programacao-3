@@ -93,7 +93,7 @@ public class Main {
           current.seeSignUpRequests(data);
           break;
         case(2):
-          current.associateTecnitians();
+          current.associateTecnitians(data);
           break;
         case(9):
           current_run = false;

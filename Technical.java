@@ -45,8 +45,8 @@ public class Technical extends Users{
 
     Technical tecnico = new Technical(username, password, nome, estado, type, NIF, numero_tele, morada);
     
-    //TODO: add the pedido de registo thingy
-    data.add_User(tecnico);
-    FileHandler.saveCredentials(username, password);
+    data.make_request(tecnico);
+    //data.add_User(tecnico);
+    //FileHandler.saveCredentials(username, password);
   }
 }

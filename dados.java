@@ -9,6 +9,7 @@ public class dados implements Serializable{
   private Vector<teste> teste = new Vector<>();
   private Vector<Users> user = new Vector<>();
   private Vector<Users> user_requests = new Vector<>(); 
+  private Vector<Services> services = new Vector<>();
 
   //Flower
   //TODO
@@ -38,15 +39,42 @@ public class dados implements Serializable{
     return user_requests;
   }
   
+  public Vector<Technical> return_tecnicos(){
+    Vector<Technical> tecnicos = new Vector<>();
+
+    for(Users usr : user){
+      if(usr.type.equals("tecnico")){
+        Technical tecnico = (Technical) usr;
+        tecnicos.add(tecnico);
+      }
+
+    }
+
+    return tecnicos;
+  }
+
+  public Vector<Services> return_services(){
+    return services;
+  }
+  
   public void add_User(Users usertoadd){
     user.add(usertoadd);
-  } 
+  }
+
+  public void add_service(Services servicetoadd){
+    services.add(servicetoadd);
+  }
 
   public void make_request(Users add_user_request){
     user_requests.add(add_user_request);
   }
 
+
   public void remove_request(int index){
     user_requests.remove(index);
+  }
+
+  public void remove_service(int index){
+    services.remove(index);
   }
 }
