@@ -22,7 +22,7 @@ public class FileHandler {
 //=========================================================
     private static String path_credencias = "trabalhoprog/Documents/credencias_acesso.txt";
 
-    private static String path_data = "trabalhoprog/Documents/dados_apl.data";
+    private static String path_data = "trabalhoprog/Documents/dados_apl.dat";
 //========================================================
 
     public static dados load_data_file(){
@@ -35,6 +35,14 @@ public class FileHandler {
         return data;
       } catch (FileNotFoundException flf) {
         System.out.println("ficheiro de dados nao conseguiu ser carregado");
+        //create an empty file
+        try{  
+          ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path_data));
+          out.close();
+          return load_data_file();
+        } catch(IOException ioe){
+          System.out.println("well fuck");
+        }
       } catch (IOException ioe) {
         System.out.println("ficheiro de dados nao conseguiu ser carregado");
       } catch (ClassNotFoundException cln){
@@ -52,8 +60,11 @@ public class FileHandler {
 
         out.writeObject(data);
         out.close();
+
+        System.out.println("A data foi guardada com sucesso");
       } catch (IOException ioe){
-        System.out.println("ups");
+        System.out.println("something went wrong writing to data");
+        System.out.println(ioe);
       }
     }
     

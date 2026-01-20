@@ -22,13 +22,16 @@ public class dados implements Serializable{
   
   public Users return_user(String ussername, String password){
     for(Users usr : user){
-      if((usr.return_user().equals(ussername)) && (usr.return_password().equals(password))){
+      //debugging==================================================
+      System.out.println(usr.return_user() + usr.return_password());
+      //===========================================================
+      if(usr.return_user().equals(ussername)){  //&& (usr.return_password().equals(password))){
         return usr;
       } 
     }
     //TODO: finish this return Users user("no_name")
     System.out.println("Nao foi encontrado nenhum utilizador com o nome e a password referidos");
-    return null;  
+    return null;
   }
 
   public int return_user_n(){
@@ -59,6 +62,7 @@ public class dados implements Serializable{
   
   public void add_User(Users usertoadd){
     user.add(usertoadd);
+    System.out.println("utilizador guardado com sucesso");
   }
 
   public void add_service(Services servicetoadd){

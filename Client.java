@@ -15,9 +15,7 @@ public class Client extends Users{
     household = aHousehold;
   }
   
-  public static void create_Client(dados data){
-    Scanner input = new Scanner(System.in);
-    
+  public static void create_Client(dados data, Scanner input){
     System.out.println("Por favor insira o nome de utilizador");
     String username = input.nextLine();
 
@@ -34,14 +32,14 @@ public class Client extends Users{
     //=========================
     System.out.println("Por favor insira o seu NIF");
     int NIF = input.nextInt();
+    input.nextLine();
 
     System.out.println("Por favor insira o seu numero de telefone");
     int numero_tele = input.nextInt();
+    input.nextLine();
 
     System.out.println("Por favor insira a sua morada");
     String morada = input.nextLine();
-    
-    input.close();
 
     Client client = new Client(username, password, nome, estado, type, NIF, numero_tele, morada);
     
