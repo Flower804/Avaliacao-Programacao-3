@@ -106,9 +106,9 @@ public class FileHandler {
       }
     }
 
-    public void saveCredentials(String username, String password){
+    public static void saveCredentials(String username, String password){
       try(FileWriter writer = new FileWriter(path_credencias, true)){
-        writer.writer(username + "," + password + "\n");
+        writer.write(username + "," + password + "\n");
       }catch(IOException e){
         System.out.println("error writing credentials to the cretentials file");
       }

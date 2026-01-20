@@ -26,10 +26,12 @@ public class dados implements Serializable{
       } 
     }
     //TODO: finish this return Users user("no_name")
+    System.out.println("Nao foi encontrado nenhum utilizador com o nome e a password referidos");
+    return null;  
   }
 
   public int return_user_n(){
-    return tecnico.size() + admin.size() + clientes.size() + user.size();
+    return user.size();
   }
   
   public void add_User(Users usertoadd){

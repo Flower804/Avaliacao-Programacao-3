@@ -40,7 +40,7 @@ public class Admin extends Users{
       Users user = new Users(username, password, nome, estado, type);  
       Admin admin = new Admin(user);
       
-      if(mode == 1){
+      if(mode == 1){ //no users were found so creating admin by default
         data.add_User(admin);
         FileHandler.saveCredentials(username, password);
         //return admin;
@@ -48,8 +48,8 @@ public class Admin extends Users{
         //TODO: create the pedido de registo thingy
       }
     }
-  
-  public static void seeSignUpRequests(){
+  /*
+  public void seeSignUpRequests(){
     //read file of SIgnUpRequests
     //numerate them and send them
     Vector<String> current_requests = FileHandler.return_userrequests();
@@ -71,7 +71,7 @@ public class Admin extends Users{
     FileHandler.removeUser(choice);
   } 
 
-  public static void associateTecnitians(){
+  public void associateTecnitians(){
     Scanner choice = new Scanner(System.in);
     System.out.println("Escolhe um tecnico");
     Vector<String> tecnicos = FileHandler.return_tecnicos();
@@ -93,4 +93,5 @@ public class Admin extends Users{
     FileHandler.addService(serviso);
     //TODO: make a function to update re-write the service's data on the services txt file with the new tecnico
   }
+  */
 }

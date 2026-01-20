@@ -44,6 +44,10 @@ public class Users {
     public String return_user(){
     	return username;
     }
+    
+    public String return_password(){
+      return password;
+    }
 
     public String return_type(){
       return type;

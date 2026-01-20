@@ -1,5 +1,7 @@
 package trabalhoprog;
 
+import java.util.Scanner;
+
 public class Technical extends Users{
   private int NIF;
   private int cellPhone;
@@ -13,7 +15,7 @@ public class Technical extends Users{
     household = aHousehold;
   }
 
-  public void create_Tecnico(dados data){
+  public static void create_Tecnico(dados data){
     Scanner input = new Scanner(System.in);
     
     System.out.println("Por favor insira o nome de utilizador");

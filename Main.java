@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
   static Users user = new Users("no_ussername", "no_password", "no_name", true, "not_defined"); 
 
-  dados data = new Dados();
+  static dados data = new dados();
 
   public static void main(String[] args){
     //Flower: debugging things
@@ -15,7 +15,7 @@ public class Main {
     if(data.return_user_n() == 0){
       //there were no users created
       System.out.println("Nao foram encontrados utilizadores, por favor crie um utilizador administrador");
-      Admin.create_admin(data);
+      Admin.create_admin(data, 1);
       //TODO: should we just pass to the adm loop or??
       //admin_loop(Admin.create_admin(data));
     } else {
@@ -54,7 +54,7 @@ public class Main {
     if(FileHandler.login(username, password)){
       System.out.println("Bem vindo " + username);
       
-      Users user = dados.return_user(username, password);
+      Users user = data.return_user(username, password);
       if(user.return_type().equals("adm")){
         Admin admin = (Admin) user; //trust me bro
         admin_loop(admin);
@@ -64,7 +64,7 @@ public class Main {
         user_loop(client);
 
       }else if(user.return_type().equals("tecnico")){
-        Thechnical tecnico = (Thechnical) user;
+        Technical tecnico = (Technical) user;
         //TODO: finish this section
         //
       }
@@ -111,11 +111,11 @@ public class Main {
     input.close();
 
     if(tipo == 1){
-      Admin.create_admin(data);
+      Admin.create_admin(data, 2);
     } else if(tipo == 2){
       Client.create_Client(data);
     } else if(tipo == 3){
-      Thechnical.create_Tecnico(data);
+      Technical.create_Tecnico(data);
     }
     //TODO: create else statement
   }

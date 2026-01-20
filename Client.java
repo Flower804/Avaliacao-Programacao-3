@@ -1,6 +1,7 @@
 package trabalhoprog;
 
 import java.util.logging.Handler;
+import java.util.Scanner;
 
 public class Client extends Users{
   private int NIF;
@@ -14,7 +15,7 @@ public class Client extends Users{
     household = aHousehold;
   }
   
-  public void create_Client(dados data){
+  public static void create_Client(dados data){
     Scanner input = new Scanner(System.in);
     
     System.out.println("Por favor insira o nome de utilizador");
