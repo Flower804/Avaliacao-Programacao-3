@@ -7,7 +7,7 @@ public class Admin extends Users{
   public Admin(Users user){
     super(user.username, user.password, user.name, user.state, user.type);
   }
-    
+      
   public boolean setType(String aType, String aUsername){
     if(aType.equals("Admin")){//Rodrigo: Tem que se ver a melhor opção a usar, supostamente só os admins podem alterar o tipo e tem que se pesquisar o username da pessoa a quem ele quer alterar
       type = aType;         //Flower: what....?
@@ -16,9 +16,7 @@ public class Admin extends Users{
     return false;
   }  
 
-  public static void create_admin(dados data, int mode){
-    Scanner input = new Scanner(System.in);
-
+  public static void create_admin(dados data, int mode, Scanner input){
     System.out.println("Por favor insira o nome de utilizador");
     String username = input.nextLine();
 
@@ -35,8 +33,6 @@ public class Admin extends Users{
     //=====================
     String type = "admin";
     //==========================
-    input.close();
-
     Users user = new Users(username, password, nome, estado, type);  
     Admin admin = new Admin(user);
       
@@ -49,7 +45,7 @@ public class Admin extends Users{
     }
   }
 
-  public void seeSignUpRequests(dados data){
+  public void seeSignUpRequests(dados data, Scanner input){
     Vector<Users> requests = data.return_user_requests();
     //Flower
     //Here we print like... all of the User's infor or....?
@@ -60,21 +56,18 @@ public class Admin extends Users{
       System.out.println("pedido " + i + " - username: " + user.return_user() + " | tipo: " + user.return_type() + "\n");
 
     }
-    Scanner input = new Scanner(System.in);
     System.out.println("Por favor escolha um pedido para aceitar");
     int choice = input.nextInt();
+    input.nextLine();
 
     user = requests.get(choice);
     FileHandler.saveCredentials(user.return_user(), user.return_password());
     data.remove_request(choice);
     data.add_User(user);
-
-    input.close();
   }
 
-  public void associateTecnitians(dados data){
+  public void associateTecnitians(dados data, Scanner input){
     Vector<Technical> tecnicos = data.return_tecnicos();
-    Scanner input = new Scanner(System.in);
 
     Technical tecnico;
     System.out.println("escolha um tecnico para associar a um servico \n");
@@ -85,6 +78,7 @@ public class Admin extends Users{
       System.out.println("tecnico " + i + "- nome: " + tecnico.return_user() + "\n");
     }
     int choice = input.nextInt();
+    input.nextLine();
     tecnico = tecnicos.get(choice);
 
     Vector<Services> services = data.return_services();
@@ -102,6 +96,7 @@ public class Admin extends Users{
       System.out.println("servico n-" + i + ": codigo " + service.get_code() + " | tecnico responsavel: " + tecnico.return_user());
     }
     choice = input.nextInt();
+    input.nextLine();
     data.remove_service(choice);
 
     service = services.get(choice);

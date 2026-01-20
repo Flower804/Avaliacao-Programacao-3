@@ -7,8 +7,9 @@ Comments: ---
 */
 import java.util.*;
 import java.util.Scanner;
+import java.io.Serializable;
 
-public class Services{
+public class Services implements Serializable{
     private int code;
     private Vector <Analyses> analysesList;
     private float totalServiceValue;
@@ -52,14 +53,14 @@ public class Services{
     }
      
     //Flower
-    public static void create_Service(dados data){
-      Scanner input = new Scanner(System.in);
-
+    public static void create_Service(dados data, Scanner input){
       System.out.println("Por favor insira o codigo do servico");
       int code = input.nextInt();
+      input.nextLine();
 
       System.out.println("por favor insira o valor total do servico");
       float total = input.nextLong();
+      input.nextLine();
 
       System.out.println("por favor indique o estado do servico");
       String estado = input.nextLine();

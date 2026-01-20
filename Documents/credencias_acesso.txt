@@ -1,4 +1,3 @@
-alguem,alguma,clientes
-admin,admin,adm
-test,test,user
-tecnico,tecnico,Tecnico
+admin,admin
+client,client
+admin1,admin1

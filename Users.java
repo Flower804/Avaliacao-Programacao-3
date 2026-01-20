@@ -2,8 +2,9 @@ package trabalhoprog;
 
 //RF3,
 //
+import java.io.Serializable;
 
-public class Users {
+public class Users implements Serializable{
     protected String username;
     protected String password;
     protected String name; 
