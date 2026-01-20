@@ -1,0 +1,38 @@
+package trabalhoprog;
+
+import java.io.Serializable;
+import java.util.Vector;
+
+public class dados implements Serializable{
+  private Vector<Certificacao> certificacao = new Vector<>(); 
+  //private Vector<ChemicalComponent> checmical = new Vector<>();
+  private Vector<teste> teste = new Vector<>();
+  private Vector<Users> user = new Vector<>();
+  
+
+  //Flower
+  //TODO
+  //current plan, so basically what it wants us to do is in the end to write all the data, what we can do is when we read the data we automatically load it to the respective Vector of its object, so when we shut down, we just need to add that data + the new data
+  //that's going to save us the headache to go to each object created in the start and add it one by one to the Vector.
+  //So the old data is already saved, so when we create a new user on the new run we just need to automatically add it to the Vector.
+  //TODO
+  //The new problem is that just if during the run we edit an already existing object, how will we find it and edit it's respective instance on the vector?
+  //we can manually search it on the Vector's list and remove it, then add it with the updated data, that could be nice  
+  
+  public Users return_user(String ussername, String password){
+    for(Users usr : user){
+      if((usr.return_user().equals(ussername)) && (usr.return_password().equals(password))){
+        return usr;
+      } 
+    }
+    //TODO: finish this return Users user("no_name")
+  }
+
+  public int return_user_n(){
+    return tecnico.size() + admin.size() + clientes.size() + user.size();
+  }
+  
+  public void add_User(Users usertoadd){
+    user.add(usertoadd);
+  } 
+}

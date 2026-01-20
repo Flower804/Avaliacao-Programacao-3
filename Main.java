@@ -21,7 +21,16 @@ public class Main {
     } else {
       //Users were found
       //procede as normal
-      login();
+      Scanner input = new Scanner(System.in);
+      System.out.println("Por favor escolha o que pretende fazer \n 1- login \n 2- Registar-se");
+      int choice = input.nextInt();
+      
+      input.close();
+      if(choice == 1){
+        login();
+      } else if(choice == 2){
+        Sign_up();
+      }
     }
   }
 
@@ -32,12 +41,7 @@ public class Main {
 
   private static void login(){
     Scanner input = new Scanner(System.in);
-    //FileHandler fileHandler = new FileHandler();
-
-    /*TODO: Flower: this is only temporary, and only aplies to users, like, you cant
-            choose if you want to be logged in as admin or user or etc...
-    */
-
+    
 	  //Flower
 	  //TODO: Precisamos de traduzir todos os System.out.println que temos bro
     System.out.println("Please insert your username: ");
@@ -45,7 +49,8 @@ public class Main {
 
     System.out.println("Please insert your password: ");
     String password = input.nextLine();
-
+    
+    input.close();
     if(FileHandler.login(username, password)){
       System.out.println("Bem vindo " + username);
       
@@ -67,8 +72,6 @@ public class Main {
 	  } else {
       System.out.println("The loggin was not succesfull");
     }
-
-    input.close();
   }
   
   private static void user_loop(Client current){
@@ -83,7 +86,8 @@ public class Main {
 
       System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- associar Tecnico a Servico" + "\n" + "9- exit");
       choice = input.nextInt();
-
+      
+      input.close();
       switch(choice){
         case(1):
           current.seeSignUpRequests();
@@ -100,26 +104,19 @@ public class Main {
   }
 
   private static void Sign_up(){
-    /*FLower
-      TODO: pass this to user class
-    */
     Scanner input = new Scanner(System.in);
-    //FileHandler fileHandler = new FileHandler();
-    user.setType("user");
+    System.out.println("Por favor escolha que tipo de utilizador pretende criar \n 1- cliente \n 2- Administrador \n 3- Tecnico");
+    int tipo = input.nextInt();
 
-    /*Flower
-     TODO: theres this little errors but it works + part of this code is repeated from the loggin, maybe we can do smth about this
-    */
+    input.close();
 
-    System.out.println("Please insert your username: ");
-    String username = input.nextLine();
-
-    System.out.println("Please insert your password: ");
-    String password = input.nextLine();
-
-    user.setUsername(username);
-    user.setPassword(password);
-    FileHandler.doUserRequest(user);
+    if(tipo == 1){
+      Admin.create_admin(data);
+    } else if(tipo == 2){
+      Client.create_Client(data);
+    } else if(tipo == 3){
+      Thechnical.create_Tecnico(data);
+    }
+    //TODO: create else statement
   }
-
 }

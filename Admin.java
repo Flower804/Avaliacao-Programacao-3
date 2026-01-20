@@ -16,28 +16,37 @@ public class Admin extends Users{
         return false;
     }
 
-    public static void create_admin(dados data){
+    public static void create_admin(dados data, int mode){
       Scanner input = new Scanner(System.in);
 
-      System.out.println("Por favor insira o nome");
+      System.out.println("Por favor insira o nome de utilizador");
       String username = input.nextLine();
 
       System.out.println("Por favor insira a password");
       String password = input.nextLine();
 
-      //TODO: finish the admin creation process
+      System.out.println("Por favor nome");
+      String nome = input.nextLine();
       
-      String nome = "nome";
+      //TODO: fix the estado thing so when the user logs in it turns to true, and when he leaves the app it turns to false
+      //and all of other file
       Boolean estado = true;
 
       //=====================
       String type = "admin";
       //==========================
+      input.close();
+
       Users user = new Users(username, password, nome, estado, type);  
       Admin admin = new Admin(user);
-      data.add_User(admin);
-      FileHandler.saveCredentials(username, password);
-      //return admin;
+      
+      if(mode == 1){
+        data.add_User(admin);
+        FileHandler.saveCredentials(username, password);
+        //return admin;
+      } else {
+        //TODO: create the pedido de registo thingy
+      }
     }
   
   public static void seeSignUpRequests(){
