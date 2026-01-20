@@ -9,8 +9,8 @@ public class Admin extends Users{
     }
     
     public boolean setType(String aType, String aUsername){
-        if(aType.equals("Admin")){//Tem que se ver a melhor opção a usar, supostamente só os admins podem alterar o tipo e tem que se pesquisar o username da pessoa a quem ele quer alterar
-            type = aType;
+        if(aType.equals("Admin")){//Rodrigo: Tem que se ver a melhor opção a usar, supostamente só os admins podem alterar o tipo e tem que se pesquisar o username da pessoa a quem ele quer alterar
+            type = aType;         //Flower: what....?
             return true;
         }
         return false;
@@ -45,8 +45,31 @@ public class Admin extends Users{
         FileHandler.saveCredentials(username, password);
         //return admin;
       } else {
-        //TODO: create the pedido de registo thingy
+        data.make_request(admin);
       }
+    }
+
+    public void seeSignUpRequests(dados data){
+      Vector<Users> requests = data.return_user_requests();
+      //Flower
+      //Here we print like... all of the User's infor or....?
+      //like for simplicity's sake I'm just fonna print the name and like type ig but we deff gotta decide this
+      Users user;
+      for(int i = 0; i < requests.size(); i++){
+        user = requests.get(i);
+        System.out.println("pedido " + i + " - username: " + user.return_user() + " | tipo: " + user.return_type() + "\n");
+
+      }
+      Scanner input = new Scanner(System.in);
+      System.out.println("Por favor escolha um pedido para aceitar");
+      int choice = input.nextInt();
+
+      user = requests.get(choice);
+      FileHandler.saveCredentials(user.return_user(), user.return_password());
+      data.remove_request(choice);
+      data.add_User(user);
+
+      input.close();
     }
   /*
   public void seeSignUpRequests(){

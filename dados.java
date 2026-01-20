@@ -8,7 +8,7 @@ public class dados implements Serializable{
   //private Vector<ChemicalComponent> checmical = new Vector<>();
   private Vector<teste> teste = new Vector<>();
   private Vector<Users> user = new Vector<>();
-  
+  private Vector<Users> user_requests = new Vector<>(); 
 
   //Flower
   //TODO
@@ -33,8 +33,20 @@ public class dados implements Serializable{
   public int return_user_n(){
     return user.size();
   }
+
+  public Vector<Users> return_user_requests(){
+    return user_requests;
+  }
   
   public void add_User(Users usertoadd){
     user.add(usertoadd);
   } 
+
+  public void make_request(Users add_user_request){
+    user_requests.add(add_user_request);
+  }
+
+  public void remove_request(int index){
+    user_requests.remove(index);
+  }
 }

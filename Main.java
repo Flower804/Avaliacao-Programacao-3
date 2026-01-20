@@ -90,7 +90,7 @@ public class Main {
       input.close();
       switch(choice){
         case(1):
-          current.seeSignUpRequests();
+          current.seeSignUpRequests(data);
           break;
         case(2):
           current.associateTecnitians();
