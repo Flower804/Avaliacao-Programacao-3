@@ -11,6 +11,7 @@ public class dados implements Serializable{
   private Vector<Users> user_requests = new Vector<>(); 
   private Vector<Services> services = new Vector<>();
   private Vector<Services> service_requests = new Vector<>(); //made by a client 
+  private Vector<fornecedor> fornecedores = new Vector<>();
 
   //Flower
   //TODO
@@ -72,6 +73,11 @@ public class dados implements Serializable{
 
   public void add_service(Services servicetoadd){
     services.add(servicetoadd);
+  }
+  
+  public void add_fornecedor(fornecedor fornecedortoadd){
+    fornecedores.add(fornecedortoadd);
+    System.out.println("o fornecedor foi guardado com sucesso");
   }
 
   public void make_request(Users add_user_request){

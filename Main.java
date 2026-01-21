@@ -142,13 +142,16 @@ public class Main {
     while(current_run){
       int choice;
 
-      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n" + "9- Sair");
+      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n 2- intruduze data \n 9- Sair");
       choice = input.nextInt();
       input.nextLine();
 
       switch(choice){
         case(1):
           current.accept_requests(data, input);
+          break;
+        case(2):
+          current.intruduze_data(data, input);
           break;
         case(9):
           current_run = false;

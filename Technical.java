@@ -67,4 +67,20 @@ public class Technical extends Users{
     data.remove_service_request(choice);
     data.add_service(service);
   }
+
+  public void intruduze_data(dados data, Scanner input){
+    //analises laboratoriais, categorias, testes, areas medicas, fornecedores, encomendas
+    System.out.println("Que tipo de dados gostaria de adicionar?\n 1- adicionar fornecedor \n 9- sair");
+    int choice = input.nextInt();
+    input.nextLine();
+
+    switch(choice){
+      case(1):
+        fornecedor.create_fornecedor(data, input);
+        break;
+
+      case(9):
+        break;
+    }
+  }
 }
