@@ -29,7 +29,7 @@ public class Technical extends Users{
     Boolean estado = true;
 
     //=========================
-    String type = "Tecnico";
+    String type = "tecnico";
     //=========================
     System.out.println("Por favor insira o seu NIF");
     int NIF = input.nextInt();
@@ -63,8 +63,8 @@ public class Technical extends Users{
     int choice = input.nextInt();
     input.nextLine();
     
-    data.remove_service_request(choice);
     service = services.get(choice);
+    data.remove_service_request(choice);
     data.add_service(service);
   }
 }

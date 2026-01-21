@@ -28,7 +28,7 @@ public class Client extends Users{
     Boolean estado = true;
 
     //=========================
-    String type = "client";
+    String type = "clients";
     //=========================
     System.out.println("Por favor insira o seu NIF");
     int NIF = input.nextInt();

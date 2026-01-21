@@ -33,7 +33,8 @@ public class FileHandler {
 
         dados data = (dados) in.readObject();
         in.close();
-
+        
+        System.out.println("data was loaded succesfully");
         return data;
       } catch (FileNotFoundException flf) {
         System.out.println("ficheiro de dados nao conseguiu ser carregado");

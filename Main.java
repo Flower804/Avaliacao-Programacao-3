@@ -83,8 +83,7 @@ public class Main {
 
           }else if(user.return_type().equals("tecnico")){
             Technical tecnico = (Technical) user;
-            //TODO: finish this section
-            //
+            Tecnico_loop(tecnico);
           }
         }
       } else {
