@@ -118,7 +118,7 @@ public class Main {
     while(current_run){
       int choice;
       
-      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- associar Tecnico a Servico" + "\n" + "9- exit");
+      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- Verificar pedidos de servico" + "\n" + "9- exit");
       choice = input.nextInt();
       input.nextLine();
 
@@ -127,13 +127,34 @@ public class Main {
           current.seeSignUpRequests(data, input);
           break;
         case(2):
-          current.associateTecnitians(data, input);
+          current.accept_requests(data, input);
+          //current.associateTecnitians(data, input);
           break;
         case(9):
           current_run = false;
           break;
       }
 
+    }
+  }
+
+  private static void Tecnico_loop(Technical current){
+    Boolean current_run = true;
+    while(current_run){
+      int choice;
+
+      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n" + "9- Sair");
+      choice = input.nextInt();
+      input.nextLine();
+
+      switch(choice){
+        case(1):
+          current.accept_requests(data, input);
+          break;
+        case(9):
+          current_run = false;
+          break;
+      }
     }
   }
 
