@@ -6,17 +6,22 @@ public class Main {
   static private Users user = new Users("no_ussername", "no_password", "no_name", true, "not_defined"); 
 
   static private dados data = new dados();
+  static private session_record session = new session_record();
 
   public static void main(String[] args){
     //Flower: debugging things
 	  System.out.println("Working directory: " + System.getProperty("user.dir"));
 
     data = FileHandler.load_data_file();
+    session = FileHandler.load_last_session();
 	  
+    session.record_session();
+    System.out.println("O programa foi executado: " + session.return_session_counter() + " - sendo o ultimo utilizador o: "+ session.return_username());
+
     if(data.return_user_n() == 0){
       //there were no users created
       System.out.println("Nao foram encontrados utilizadores, por favor crie um utilizador administrador");
-      Admin.create_admin(data, 1, input);
+      session.set_User(Admin.create_admin(data, 1, input));
       //TODO: should we just pass to the adm loop or??
       //admin_loop(Admin.create_admin(data));
     } else {
@@ -32,14 +37,15 @@ public class Main {
         Sign_up();
       }
     }
-    on_exit(data);
+    on_exit();
   }
 
-  private static void on_exit(dados data){
+  private static void on_exit(){
     //find a way to get username
     System.out.println("Adeus " + user.return_user());
     input.close();
     FileHandler.save_data(data);
+    FileHandler.save_session(session);
   }
 
   private static void login(){
@@ -57,7 +63,9 @@ public class Main {
       if(FileHandler.login(username, password)){
         loggin = false;
         System.out.println("Bem vindo " + username);
-      
+        
+        session.set_User(username);
+
         Users user = data.return_user(username, password);
         //TODO: Flower TEMP FIX
         //This should never happen because logically if the credentials exist the user should exist too, but for some god ass reason it's happening
@@ -119,11 +127,11 @@ public class Main {
     input.nextLine();
 
     if(tipo == 1){
-      Client.create_Client(data, input);
+      session.set_User(Client.create_Client(data, input));
     } else if(tipo == 2){
-      Admin.create_admin(data, 2, input);
+      session.set_User(Admin.create_admin(data, 2, input));
     } else if(tipo == 3){
-      Technical.create_Tecnico(data, input);
+      session.set_User(Technical.create_Tecnico(data, input));
     }
     //TODO: create else statement
   }

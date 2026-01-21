@@ -15,7 +15,7 @@ public class Client extends Users{
     household = aHousehold;
   }
   
-  public static void create_Client(dados data, Scanner input){
+  public static String create_Client(dados data, Scanner input){
     System.out.println("Por favor insira o nome de utilizador");
     String username = input.nextLine();
 
@@ -46,5 +46,6 @@ public class Client extends Users{
     data.make_request(client);
     //data.add_User(client);
     //FileHandler.saveCredentials(username, password);
+    return username;
   }
 }

@@ -23,6 +23,8 @@ public class FileHandler {
     private static String path_credencias = "trabalhoprog/Documents/credencias_acesso.txt";
 
     private static String path_data = "trabalhoprog/Documents/dados_apl.dat";
+
+    private static String path_last_session = "trabalhoprog/Documents/info_sistema.dat";
 //========================================================
 
     public static dados load_data_file(){
@@ -53,6 +55,30 @@ public class FileHandler {
       }*/
       return new dados();
     }
+    
+    public static session_record load_last_session(){
+      try{
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(path_last_session));
+        
+        session_record last_session = (session_record) in.readObject();
+        in.close();
+
+        return last_session;
+      } catch(FileNotFoundException fnf){
+        try{
+          ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path_last_session));
+          out.close();
+          return load_last_session();
+        } catch(IOException ioe){
+          System.out.println("create file falesafe faild");
+        }
+      }catch(IOException ioe){
+        System.out.println("Dados sobre a ultima sessao nao foram carregados");
+      } catch(ClassNotFoundException cln){
+        System.out.println("Dados sobre a ultima sessao nao foram carregados");
+      }
+      return new session_record();
+    }
 
     public static void save_data(dados data){
       try{
@@ -65,6 +91,19 @@ public class FileHandler {
       } catch (IOException ioe){
         System.out.println("something went wrong writing to data");
         System.out.println(ioe);
+      }
+    }
+
+    public static void save_session(session_record session){
+      try{
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path_last_session));
+
+        out.writeObject(session);
+        out.close();
+
+        System.out.println("dados sobre a sessao foram guardados com sucesso");
+      } catch(IOException ioe){
+        System.out.println("Ocorreu um erro a guardar os dados sobre a sessao");
       }
     }
     
