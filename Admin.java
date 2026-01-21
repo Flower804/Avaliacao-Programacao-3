@@ -91,6 +91,7 @@ public class Admin extends Users{
 
     if(decition == 1){
       service.setState("aprovado");
+      associateTecnitians(data, input, service);
     } else {
       service.setState("rejeitado");
     }
@@ -98,12 +99,15 @@ public class Admin extends Users{
     data.remove_service_request(choice);
     data.add_service(service);
   }
-
-  public void associateTecnitians(dados data, Scanner input){
+  
+  //Flower
+  //R11 and R18 are like the same?? continuation???? 
+  //like I'm just gonna make it a continuation.....
+  public void associateTecnitians(dados data, Scanner input, Services service){
     Vector<Technical> tecnicos = data.return_tecnicos();
 
     Technical tecnico;
-    System.out.println("escolha um tecnico para associar a um servico \n");
+    System.out.println("escolha um tecnico para associar ao servico \n");
     for(int i = 0; i < tecnicos.size(); i++){
       tecnico = tecnicos.get(i);
       
@@ -113,7 +117,8 @@ public class Admin extends Users{
     int choice = input.nextInt();
     input.nextLine();
     tecnico = tecnicos.get(choice);
-
+    
+    /*
     Vector<Services> services = data.return_services();
     //Flower: 
     //like ok same question as in the method before like... what exactly do we print?
@@ -136,5 +141,7 @@ public class Admin extends Users{
 
     service.set_Tecnico(tecnico);
     data.add_service(service);
+    */
+    service.set_Tecnico(tecnico);
   } 
 }
