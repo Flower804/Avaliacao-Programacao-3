@@ -1,6 +1,7 @@
 package trabalhoprog;
 
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Technical extends Users{
   private int NIF;
@@ -15,7 +16,7 @@ public class Technical extends Users{
     household = aHousehold;
   }
 
-  public static void create_Tecnico(dados data, Scanner input){
+  public static String create_Tecnico(dados data, Scanner input){
     System.out.println("Por favor insira o nome de utilizador");
     String username = input.nextLine();
 
@@ -44,7 +45,26 @@ public class Technical extends Users{
     Technical tecnico = new Technical(username, password, nome, estado, type, NIF, numero_tele, morada);
     
     data.make_request(tecnico);
+    return username;
     //data.add_User(tecnico);
     //FileHandler.saveCredentials(username, password);
+  }
+
+  public void accept_requests(dados data, Scanner input){
+    Vector<Services> services = data.return_service_request();
+
+    System.out.println("Escolha qual servico aceitar");
+
+    Services service;
+    for(int i = 0; i < services.size(); i++){
+      service = services.get(i);
+      System.out.println("service " + i + ":" + " codigo:" + service.get_code());
+    }
+    int choice = input.nextInt();
+    input.nextLine();
+    
+    data.remove_service_request(choice);
+    service = services.get(choice);
+    data.add_service(service);
   }
 }

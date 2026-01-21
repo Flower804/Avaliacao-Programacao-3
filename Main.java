@@ -93,8 +93,24 @@ public class Main {
     }
   }
   
+  //I mean it's the client's loop but who cares with consistent and accurate method naming
   private static void user_loop(Client current){
-    System.out.println("on clients loop");
+    //System.out.println("on clients loop");
+    boolean current_run = true;
+    while(current_run){
+      System.out.println("O que gostaria de fazer?" + "\n" + "1- executar pedido de servico" + "\n" + "9- sair");
+      int choice = input.nextInt();
+      input.nextLine();
+
+      switch(choice){
+        case(1):
+          current.request_a_service(data, input);
+          break;
+        case(9):
+          current_run = false;
+          break;
+      }
+    }
   }
 
   private static void admin_loop(Admin current){

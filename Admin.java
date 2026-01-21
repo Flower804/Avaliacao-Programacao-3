@@ -16,7 +16,7 @@ public class Admin extends Users{
     return false;
   }  
 
-  public static void create_admin(dados data, int mode, Scanner input){
+  public static String create_admin(dados data, int mode, Scanner input){
     System.out.println("Por favor insira o nome de utilizador");
     String username = input.nextLine();
 
@@ -35,7 +35,7 @@ public class Admin extends Users{
     //==========================
     Users user = new Users(username, password, nome, estado, type);  
     Admin admin = new Admin(user);
-      
+    
     if(mode == 1){ //no users were found so creating admin by default
       data.add_User(admin);
       FileHandler.saveCredentials(username, password);
@@ -43,6 +43,7 @@ public class Admin extends Users{
     } else {
       data.make_request(admin);
     }
+    return username;
   }
 
   public void seeSignUpRequests(dados data, Scanner input){
@@ -64,6 +65,38 @@ public class Admin extends Users{
     FileHandler.saveCredentials(user.return_user(), user.return_password());
     data.remove_request(choice);
     data.add_User(user);
+  }
+
+  public void accept_requests(dados data, Scanner input){
+    //Flower
+    //this is basically just like copied from Technical.java, because like R13 says that tecnicos must accept the service,
+    //but then R18 and R20 says that the Admin must accept, idk bro I just did both out of confusion
+    Vector<Services> services = data.return_service_request();
+
+    System.out.println("Escolha qual servico selecionar");
+
+    Services service;
+    for(int i = 0; i < services.size(); i++){
+      service = services.get(i);
+      System.out.println("service " + i + ":" + " codigo:" + service.get_code());
+    }
+    int choice = input.nextInt();
+    input.nextLine();
+    
+    service = services.get(choice);
+    System.out.println();
+    System.out.println("Escolha o que fazer: 1- Aprovar 2- Rejeitar");
+    int decition = input.nextInt();
+    input.nextLine();
+
+    if(decition == 1){
+      service.setState("aprovado");
+    } else {
+      service.setState("rejeitado");
+    }
+
+    data.remove_service_request(choice);
+    data.add_service(service);
   }
 
   public void associateTecnitians(dados data, Scanner input){

@@ -43,6 +43,10 @@ public class dados implements Serializable{
     return user_requests;
   }
   
+  public Vector<Services> return_service_request(){
+    return service_requests;
+  }
+
   public Vector<Technical> return_tecnicos(){
     Vector<Technical> tecnicos = new Vector<>();
 
@@ -81,6 +85,10 @@ public class dados implements Serializable{
 
   public void remove_request(int index){
     user_requests.remove(index);
+  }
+  
+  public void remove_service_request(int index){
+    service_requests.remove(index);
   }
 
   public void remove_service(int index){
