@@ -23,7 +23,7 @@ public class Services implements Serializable{
         code = aCode;
         totalServiceValue = aTotal;
         state = aState;
-        dateBeggin = null;
+        dateBeggin = new Date();
         conclusionDate = null;
         analysesList = new Vector<>();
         tecnico_responsavel = null; //Flower
@@ -62,10 +62,12 @@ public class Services implements Serializable{
       float total = input.nextLong();
       input.nextLine();
 
-      System.out.println("por favor indique o estado do servico");
-      String estado = input.nextLine();
+      //System.out.println("por favor indique o estado do servico");
+      //String estado = input.nextLine();
+      String estado = "iniciado";
 
       Services service = new Services(code, total, estado);
-      data.add_service(service);
+      //data.add_service(service);
+      data.request_service(service);
     }
 }

@@ -10,6 +10,7 @@ public class dados implements Serializable{
   private Vector<Users> user = new Vector<>();
   private Vector<Users> user_requests = new Vector<>(); 
   private Vector<Services> services = new Vector<>();
+  private Vector<Services> service_requests = new Vector<>(); //made by a client 
 
   //Flower
   //TODO
@@ -71,6 +72,10 @@ public class dados implements Serializable{
 
   public void make_request(Users add_user_request){
     user_requests.add(add_user_request);
+  }
+
+  public void request_service(Services service){
+    service_requests.add(service);
   }
 
 

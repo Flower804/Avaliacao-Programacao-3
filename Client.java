@@ -48,4 +48,8 @@ public class Client extends Users{
     //FileHandler.saveCredentials(username, password);
     return username;
   }
+
+  public void request_a_service(dados data, Scanner input){
+    Services.create_Service(data, input);
+  }
 }
