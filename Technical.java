@@ -83,4 +83,8 @@ public class Technical extends Users{
         break;
     }
   }
+
+  public void create_medical_area(dados data, Scanner input){
+    area_medica.create_area_medica(data, input);
+  }
 }

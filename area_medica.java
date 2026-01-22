@@ -12,7 +12,7 @@ public class area_medica implements Serializable{
     this.familia = familia;
   }
 
-  public static create_area_medica(dados data, Scanner input){
+  public static void create_area_medica(dados data, Scanner input){
     System.out.println("Por favor insira a designacao da area medica");
     String designacao = input.nextLine();
 
