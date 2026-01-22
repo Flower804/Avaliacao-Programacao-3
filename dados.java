@@ -13,6 +13,7 @@ public class dados implements Serializable{
   private Vector<Services> service_requests = new Vector<>(); //made by a client 
   private Vector<fornecedor> fornecedores = new Vector<>();
   private Vector<area_medica> areas_medicas = new Vector<>();
+  private Vector<encomendas> encomendas_existentes = new Vector<>();
 
   //Flower
   //TODO
@@ -35,6 +36,10 @@ public class dados implements Serializable{
     //TODO: finish this return Users user("no_name")
     System.out.println("Nao foi encontrado nenhum utilizador com o nome e a password referidos");
     return null;
+  }
+  
+  public Vector<encomendas> return_encomendas(){
+    return encomendas_existentes;
   }
 
   public int return_user_n(){

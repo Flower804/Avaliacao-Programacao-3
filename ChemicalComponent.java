@@ -1,3 +1,5 @@
+package trabalhoprog;
+
 public class ChemicalComponent {
     private String designation;
     private String alphaValue;
