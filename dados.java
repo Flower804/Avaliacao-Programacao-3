@@ -61,7 +61,7 @@ public class dados implements Serializable{
   public Vector<Technical> return_tecnicos(){
     Vector<Technical> tecnicos = new Vector<>();
 
-    for(Users usr : user){
+    for(Users usr : user){ //Rodrigo: U can't use for here (teacher says that in dinamic structures were are not allowed to use for / for each loop)
       if(usr.type.equals("tecnico")){
         Technical tecnico = (Technical) usr;
         tecnicos.add(tecnico);
