@@ -13,6 +13,10 @@ public class fornecedor implements Serializable{
     this.morada = morada;
     this.contacto_telefonico = contacto_telefonico;
   }
+  
+  public String get_nome(){
+    return nome;
+  }
 
   public static void create_fornecedor(dados data, Scanner input){
     System.out.println("Por favor insira o nome do fornecedor");

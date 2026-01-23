@@ -87,4 +87,8 @@ public class Technical extends Users{
   public void create_medical_area(dados data, Scanner input){
     area_medica.create_area_medica(data, input);
   }
+
+  public void create_encomenda(dados data, Scanner input){
+    encomendas.create_encomenda(data, input);
+  }
 }

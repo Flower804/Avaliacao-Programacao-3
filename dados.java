@@ -53,6 +53,10 @@ public class dados implements Serializable{
   public Vector<Services> return_service_request(){
     return service_requests;
   }
+  
+  public Vector<fornecedor> return_fornecedor(){
+    return fornecedores;
+  }
 
   public Vector<Technical> return_tecnicos(){
     Vector<Technical> tecnicos = new Vector<>();
@@ -72,6 +76,11 @@ public class dados implements Serializable{
     return services;
   }
   
+  public void add_encomenda(encomendas encomenda){
+    encomendas_existentes.add(encomenda);
+    System.out.println("encomenda adicionada com sucesso");
+  }
+
   public void add_area_medica(area_medica area_to_add){
     areas_medicas.add(area_to_add);
   }

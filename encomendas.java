@@ -15,10 +15,13 @@ public class encomendas implements Serializable{
                       //then assign a code to this encomenda, if that code is already present in any other encomenda, we just change it, and repeat
                       //see simple
 
-  public encomendas(Vector<ChemicalComponent> componentes, int quantidade, dados data){
+  private fornecedor fornecedor_encomendado;
+
+  public encomendas(Vector<ChemicalComponent> componentes, int quantidade, fornecedor fornecedor_encomendado, dados data){
     this.compomentes = compomentes;
     this.quantidade = quantidade;
     this.data_pedido = new Date();
+    this.fornecedor_encomendado = fornecedor_encomendado;
     this.codigo = 0;
 
     Boolean code_unique = false;
@@ -47,5 +50,48 @@ public class encomendas implements Serializable{
 
   public int get_codigo(){
     return codigo; 
+  }
+
+  public static void create_encomenda(dados data, Scanner input){
+    System.out.println("por favor selecione quais componentes quimicos deseja");
+    //Flower
+    //TODO: Rodrigo, after you create the Componentes quimicos thing you need to complete this by
+    //go to dados and get the current existing vector list of componentes quimicos
+    Vector<ChemicalComponent> componentes_selected = new Vector<>();
+    Boolean on_selection = true;
+    int choice;
+    while(on_selection){
+      //Flower
+      //TODO: display the Vector list
+      
+      choice = input.nextInt();
+      input.nextLine(); //Flower: Rodrigo don't take this line out, or else the rest of the programs inputs will break
+      
+      if(choice == 9){
+        on_selection = false;
+        break;
+      }
+
+      componentes_selected.add(/*TODO: [the vector containing the ChemicalComponent that we have].get(choice)*/);
+    }
+
+    System.out.println("por favor indique qual a quantidade que deseja");
+    int quantidade = input.nextInt();
+
+    System.out.println("por favor indique o fornecedor a que pretende fazer a encomenda");
+    Vector<fornecedor> fornecedores = data.return_fornecedor();
+    fornecedor forn;
+    for(int i = 0; i < fornecedores.size(); i++){
+      forn = fornecedores.get(i);
+      
+      System.out.println("fornecedor n" + i + "- nome" + forn.get_nome());
+    }
+    choice = input.nextInt();
+    input.nextLine();
+
+    forn = fornecedores.get(choice);
+    
+    encomendas encomenda = new encomendas(componentes_selected, quantidade, forn, data);
+    data.add_encomenda(encomenda);
   }
 }
