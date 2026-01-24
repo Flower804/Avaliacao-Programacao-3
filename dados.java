@@ -2,6 +2,7 @@ package trabalhoprog;
 
 import java.io.Serializable;
 import java.util.Vector;
+import java.util.Iterator;
 
 public class dados implements Serializable{
   private Vector<Certificacao> certificacao = new Vector<>(); 
@@ -25,7 +26,10 @@ public class dados implements Serializable{
   //we can manually search it on the Vector's list and remove it, then add it with the updated data, that could be nice  
   
   public Users return_user(String ussername, String password){
-    for(Users usr : user){
+    Iterator<Users> it = user.iterator();
+    while(it.hasNext()){
+      Users usr = it.next();
+
       //debugging==================================================
       System.out.println(usr.return_user() + usr.return_password());
       //===========================================================
@@ -61,12 +65,14 @@ public class dados implements Serializable{
   public Vector<Technical> return_tecnicos(){
     Vector<Technical> tecnicos = new Vector<>();
 
-    for(Users usr : user){ //Rodrigo: U can't use for here (teacher says that in dinamic structures were are not allowed to use for / for each loop)
+    Iterator<Users> it = user.iterator();
+    while(it.hasNext()){
+      Users usr = it.next();
+
       if(usr.type.equals("tecnico")){
         Technical tecnico = (Technical) usr;
         tecnicos.add(tecnico);
       }
-
     }
 
     return tecnicos;
