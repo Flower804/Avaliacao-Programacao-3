@@ -1,4 +1,2 @@
 admin,admin
 client,client
-tecnico,tecnico
-tecnico,tecnico
