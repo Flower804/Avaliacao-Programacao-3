@@ -171,10 +171,7 @@ public class Admin extends Users{
       choice = input.nextInt();
       input.nextLine();
 
-      switch (choice) {
-        case 0:
-          break;
-      //TODO: finish inserting things Here
+      service.manage_service(data, input, choice);
       }
     }
   }
