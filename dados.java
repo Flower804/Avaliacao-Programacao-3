@@ -84,7 +84,24 @@ public class dados implements Serializable{
   public Vector<Services> return_services(){
     return services;
   }
- 
+  
+  public Vector<Services> return_service_by_tecnico(int NIF){
+    //using NIF because it's going to always be constant and unique so (it would be if the guy responsible for making it unique actually did it)
+    Vector<Technical> current_tecnicos = return_tecnicos();
+    Vector<Services> service_by_tecnico = new Vector<>();
+
+    Iterator<Services> it = services.iterator();
+    while(it.hasNext()){
+      Services it_service = it.next();
+      Technical current_tecnico_inservice = it_service.return_tecnico();
+      if(current_tecnico_inservice.get_NIF == NIF){
+        service_by_tecnico.add(it_service);
+      }
+    }
+
+    return service_by_tecnico;
+  }
+
   public Vector<Analyses> return_analises(){
     return analises_existentes;
   }

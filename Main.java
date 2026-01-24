@@ -145,7 +145,7 @@ public class Main {
     while(current_run){
       int choice;
 
-      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n2- intruduze data \n3- adicionar area medica \n9- Sair");
+      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n2- intruduze data \n3- adicionar area medica \n4- manage services \n9- Sair");
       choice = input.nextInt();
       input.nextLine();
 
@@ -158,6 +158,9 @@ public class Main {
           break;
         case(3):
           current.create_medical_area(data, input);
+          break;
+        case(4):
+          current.manage_services(data, input);
           break;
         case(9):
           current_run = false;

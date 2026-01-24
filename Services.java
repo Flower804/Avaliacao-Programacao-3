@@ -52,7 +52,11 @@ public class Services implements Serializable{
     public float get_totalServiceValue(){
       return totalServiceValue;
     }
-    
+      
+    public String get_status(){
+      return state;
+    }
+
     //Flower
     //like sure I can just return a Tecnico here
     public Technical return_tecnico(){
@@ -64,16 +68,22 @@ public class Services implements Serializable{
     }
    
     //Flower
+    //TODO: create a state changer method
+
+    //Flower
     public manage_service(dados data, Scanner input, int edit){
       switch(edit){
-        case 1:
+        case(1):
           Vector<Analyses> new_analises = create_array_analises();
           break;
-        case 2:
+        case(2):
           System.out.println("indique o novo valor total de analise: ");
           float new_value = input.nextLong();
           input.nextLine();
           set_total_value(new_value);
+          break;
+        case(3):
+          //TODO: implement here the state changer method
           break;
       }
     }
