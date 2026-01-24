@@ -3,6 +3,11 @@ package trabalhoprog;
 import java.io.Serializable;
 import java.util.Vector;
 import java.util.Iterator;
+<<<<<<< HEAD
+=======
+
+//Made entirely by Flower and ONLY FLOWER
+>>>>>>> Moita-linux
 
 public class dados implements Serializable{
   private Vector<Certificacao> certificacao = new Vector<>(); 
@@ -15,6 +20,7 @@ public class dados implements Serializable{
   private Vector<fornecedor> fornecedores = new Vector<>();
   private Vector<area_medica> areas_medicas = new Vector<>();
   private Vector<encomendas> encomendas_existentes = new Vector<>();
+  private Vector<Analyses> analises_existentes = new Vector<>();
 
   //Flower
   //TODO
@@ -81,7 +87,11 @@ public class dados implements Serializable{
   public Vector<Services> return_services(){
     return services;
   }
-  
+ 
+  public Vector<Analyses> return_analises(){
+    return analises_existentes;
+  }
+
   public void add_encomenda(encomendas encomenda){
     encomendas_existentes.add(encomenda);
     System.out.println("encomenda adicionada com sucesso");
