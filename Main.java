@@ -97,13 +97,16 @@ public class Main {
     //System.out.println("on clients loop");
     boolean current_run = true;
     while(current_run){
-      System.out.println("O que gostaria de fazer?" + "\n" + "1- executar pedido de servico" + "\n" + "9- sair");
+      System.out.println("O que gostaria de fazer?" + "\n" + "1- executar pedido de servico" + "\n" + "2- gerir pedidos de servico \n9- sair");
       int choice = input.nextInt();
       input.nextLine();
 
       switch(choice){
         case(1):
           current.request_a_service(data, input);
+          break;
+        case(2):
+          current.manage_services(data, input);
           break;
         case(9):
           current_run = false;
