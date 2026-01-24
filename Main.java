@@ -117,7 +117,7 @@ public class Main {
     while(current_run){
       int choice;
       
-      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- Verificar pedidos de servico" + "\n" + "9- exit");
+      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- Verificar pedidos de servico\n" + "3- manage services" + "9- exit");
       choice = input.nextInt();
       input.nextLine();
 
@@ -128,6 +128,9 @@ public class Main {
         case(2):
           current.accept_requests(data, input);
           //current.associateTecnitians(data, input);
+          break;
+        case(3):
+          current.manage_services(data, input);
           break;
         case(9):
           current_run = false;
