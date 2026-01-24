@@ -48,6 +48,12 @@ public class Services implements Serializable{
       return code;
     }
     
+    //Flower
+    public float get_totalServiceValue(){
+      return totalServiceValue;
+    }
+    
+    //Flower
     //like sure I can just return a Tecnico here
     public Technical return_tecnico(){
       return tecnico_responsavel;

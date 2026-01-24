@@ -167,12 +167,12 @@ public class Admin extends Users{
       Services service = current_services.get(choice);
       
       System.out.println("O que pretende editar?");
-      System.out.println("1-Lista de analises: " + "[inserir a a lista de analises] " + " 2-valor total de servico" + "etc..." + " 0- sair");
+      System.out.println("1-Lista de analises: " + "[inserir a a lista de analises] " + " 2-valor total de servico" + service.get_totalServiceValue() + " 0- sair");
       choice = input.nextInt();
       input.nextLine();
 
       service.manage_service(data, input, choice);
-      }
+      
     }
   }
 }
