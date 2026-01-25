@@ -155,24 +155,26 @@ public class Admin extends Users{
       Services service = it.next();
       
       //TODO: finish puting everything Here
-      System.out.println("servico n" + counter + "- codigo: " + service.get_code() + "- estado: " + service.get_state());
+      System.out.println("servico n" + counter + "- codigo: " + service.get_code() + "- estado: " + service.get_status());
     }
-    int choice = input.nextInt();
+    int choice_service = input.nextInt();
     input.nextLine();
     
-    if(choice == 9){
+    if(choice_service == 9){
       System.out.println("Escolheu nao gerir nenhum sevico");
       //exits
     } else {
-      Services service = current_services.get(choice);
+      Services service = current_services.get(choice_service);
       
       System.out.println("O que pretende editar?");
-      System.out.println("1-Lista de analises: " + "[inserir a a lista de analises] " + " 2-valor total de servico" + service.get_totalServiceValue() + " 3- estado " + service.get_state() + " 0- sair");
-      choice = input.nextInt();
+      System.out.println("1-Lista de analises: " + "[inserir a a lista de analises] " + " 2-valor total de servico" + service.get_totalServiceValue() + " 3- estado " + service.get_status() + " 0- sair");
+      int choice = input.nextInt();
       input.nextLine();
 
       service.manage_service(data, input, choice);
-      
+      data.remove_service(choice_service);
+      data.add_service(service);
+      System.out.println("servico atualizado com sucesso");
     }
   }
 }

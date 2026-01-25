@@ -93,7 +93,7 @@ public class dados implements Serializable{
     while(it.hasNext()){
       Services it_service = it.next();
       Technical current_tecnico_inservice = it_service.return_tecnico();
-      if(current_tecnico_inservice.get_NIF == NIF){
+      if(current_tecnico_inservice.get_NIF() == NIF){
         service_by_tecnico.add(it_service);
       }
     }
@@ -117,7 +117,7 @@ public class dados implements Serializable{
       }
     }
 
-    return services_by_user();
+    return services_by_user;
   }
 
   public Vector<Analyses> return_analises(){
@@ -155,6 +155,35 @@ public class dados implements Serializable{
     service_requests.add(service);
   }
 
+  public void save_updated_service(Services service, int entrance){
+    int searched_index = -1;
+    Vector<Services> to_search;
+
+    if(entrance == 1){ //entrance came from tecnico 
+      to_search = services; 
+    } else { //entrance came from client 
+      to_search = service_requests; 
+    } 
+    
+    Iterator<Services> it = to_search.iterator();
+    while(it.hasNext()){ 
+      Services searched = it.next(); 
+      int searched_code = searched.get_code();
+
+      if(searched_code == service.get_code()){
+        searched_index = to_search.indexOf(searched);  
+        break;
+      }
+    }
+
+    if(searched_index != -1){
+      to_search.remove(searched_index);
+      to_search.add(service);
+      System.out.println("Servico atualizado com sucesso");
+    } else {
+      System.out.println("Aconeceu um erro a atualizar os dados do servico");
+    }
+  }
 
   public void remove_request(int index){
     user_requests.remove(index);

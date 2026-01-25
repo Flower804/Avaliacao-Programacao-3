@@ -90,7 +90,7 @@ public class Technical extends Users{
   }
   
   public void manage_services(dados data, Scanner input){
-    Vector<Services> current_services = data.return_service_by_tecnico();
+    Vector<Services> current_services = data.return_service_by_tecnico(NIF);
 
     System.out.println("selecione qual servico pertende gerir - ou selecione 9 para sair");
     Iterator<Services> it = current_services.iterator();
@@ -99,7 +99,7 @@ public class Technical extends Users{
       counter++;
       Services service = it.next();
 
-      System.out.println("servico n" + counter + "- codigo: " + service.get_code() + " - estado: " + service.get_state());
+      System.out.println("servico n" + counter + "- codigo: " + service.get_code() + " - estado: " + service.get_status());
     }
     int choice = input.nextInt();
     input.nextLine();
@@ -110,11 +110,12 @@ public class Technical extends Users{
       Services service = current_services.get(choice);
 
       System.out.println("O que pretende editar?");
-      System.out.println("1- Lista de analises: " + "[TODO: inserir a lista de analises]" + " 2- valor total de servico " + service.get_totalServiceValue() + " 3- estado" + service.get_state());
+      System.out.println("1- Lista de analises: " + "[TODO: inserir a lista de analises]" + " 2- valor total de servico " + service.get_totalServiceValue() + " 3- estado" + service.get_status());
       choice = input.nextInt();
       input.nextLine();
 
       service.manage_service(data, input, choice);
+      data.save_updated_service(service, 1);
     }
   }
 

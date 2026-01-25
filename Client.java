@@ -3,6 +3,7 @@ package trabalhoprog;
 import java.util.logging.Handler;
 import java.util.Scanner;
 import java.util.Iterator;
+import java.util.Vector;
 
 public class Client extends Users{
   private int NIF;
@@ -55,7 +56,7 @@ public class Client extends Users{
   }
 
   public void request_a_service(dados data, Scanner input){
-    Services.create_Service(data, input);
+    Services.create_Service(data, input, get_username());
   }
 
   public void manage_services(dados data, Scanner input){
@@ -85,10 +86,11 @@ public class Client extends Users{
       choice = input.nextInt();
       input.nextLine();
       
-      if((input != 1) || (input != 2){
-        System.out.println("escolha invalida")
+      if((choice != 1) || (choice != 2)){
+        System.out.println("escolha invalida");
       } else {
         service.manage_service(data, input, choice);
+        data.save_updated_service(service, 2);
       }
     }
   }

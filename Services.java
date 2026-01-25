@@ -76,10 +76,10 @@ public class Services implements Serializable{
     //TODO: create a state changer method
 
     //Flower
-    public manage_service(dados data, Scanner input, int edit){
+    public void manage_service(dados data, Scanner input, int edit){
       switch(edit){
         case(1):
-          Vector<Analyses> new_analises = create_array_analises();
+          Vector<Analyses> new_analises = create_array_analises(data, input);
           break;
         case(2):
           System.out.println("indique o novo valor total de analise: ");
@@ -94,7 +94,7 @@ public class Services implements Serializable{
     }
 
     //Flower
-    private Vector<Analyses> create_array_analises(){
+    private Vector<Analyses> create_array_analises(dados data, Scanner input){
       Vector<Analyses> selected_analyses = new Vector<>();
 
       System.out.println("por favor escolha as analises que pretenda adicionar - ou 9 para parar de adicionar");
@@ -111,11 +111,11 @@ public class Services implements Serializable{
       
       if(choice == 9){
         System.out.println("Parou de selecionar analises");
-        return selected_analyses;
       }else{
         Analyses analise = existing_analyses.get(choice);
         selected_analyses.add(analise);
       }
+      return selected_analyses;
     }
 
     //Flower
