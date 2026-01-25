@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
   static private Scanner input = new Scanner(System.in);
   static private Users user = new Users("no_ussername", "no_password", "no_name", true, "not_defined"); 
+  static private String csv_dir = "Documents/servicos.csv";
 
   static private dados data = new dados();
   static private session_record session = new session_record();
@@ -27,7 +28,7 @@ public class Main {
     } else {
       //Users were found
       //procede as normal
-      System.out.println("Por favor escolha o que pretende fazer \n 1- login \n 2- Registar-se");
+      System.out.println("Por favor escolha o que pretende fazer \n 1- login \n 2- Registar-se \n 3- exportar servicos");
       int choice = input.nextInt();
       input.nextLine();
 
@@ -35,6 +36,8 @@ public class Main {
         login();
       } else if(choice == 2){
         Sign_up();
+      } else if(choice == 3){
+        data.create_csv_output(csv_dir);
       }
     }
     on_exit();

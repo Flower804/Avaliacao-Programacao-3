@@ -3,11 +3,18 @@ package trabalhoprog;
 import java.io.Serializable;
 import java.util.Vector;
 import java.util.Iterator;
-<<<<<<< HEAD
-=======
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.util.List;
+import java.io.PrintWriter;
+
+//TODO: verify if this is permited
+import java.io.File;
 
 //Made entirely by Flower and ONLY FLOWER
->>>>>>> Moita-linux
 
 public class dados implements Serializable{
   private Vector<Certificacao> certificacao = new Vector<>(); 
@@ -148,6 +155,52 @@ public class dados implements Serializable{
   public void add_fornecedor(fornecedor fornecedortoadd){
     fornecedores.add(fornecedortoadd);
     System.out.println("o fornecedor foi guardado com sucesso");
+  }
+  
+  public void create_csv_output(String csv_dir) throws IOException{
+    File csvOutputFile = new File(csv_dir);
+    
+    List<String[]> dataLines = convert_csv();
+    Iterator<String[]> it = dataLines.iterator();
+
+    try(PrintWriter pw = new PrintWriter(csvOutputFile)){
+      while(it.hasNext()){
+        String[] line = it.next();
+        pw.println(String.join(",", line));
+      }
+    }
+  }
+
+  public List<String[]> convert_csv(){
+    List<String[]> dataLines = new ArrayList<>();
+    String pattern = "dd/MM/yyyy";
+    
+    DateFormat df = new SimpleDateFormat(pattern);
+
+    Iterator<Services> it = services.iterator();
+    while(it.hasNext()){
+      Services service = it.next();
+      
+      //<data>m <valor>, <client>, <analises>
+      String date = df.format(service.get_date());
+      String value = "" + service.get_totalServiceValue();
+      String client = service.return_username();
+      String analises_list = "";
+      
+      Vector<Analyses> analises = service.return_analises();
+
+      Iterator<Analyses> itt = analises.iterator();
+      while(itt.hasNext()){
+        Analyses service_analise = itt.next();
+        analises_list = analises_list.concat("; " + service_analise.get_designacao());
+      }
+
+      //<data>, <valor>, <cliente>, <analises>
+      dataLines.add(new String[]
+          {date, value, client, analises_list});
+    }
+
+    return dataLines;
   }
 
   public void make_request(Users add_user_request){

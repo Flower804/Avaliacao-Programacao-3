@@ -74,4 +74,11 @@ public class Analyses {
     public boolean removeTest(teste aTest){
         return testsList.remove(aTest);
     }
+
+
+  //Flower
+  //Im not associated with anything that was writen above, I dont want to be, every author can be checked on the github repo 
+  public String get_designacao(){
+    return designation;
+  }
 }

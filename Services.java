@@ -53,15 +53,25 @@ public class Services implements Serializable{
     public float get_totalServiceValue(){
       return totalServiceValue;
     }
-      
+    
+    //Flower
     public String get_status(){
       return state;
+    }
+
+    //Flower
+    public Date get_date(){
+      return dateBeggin;
     }
 
     //Flower
     //like sure I can just return a Tecnico here
     public Technical return_tecnico(){
       return tecnico_responsavel;
+    }
+    
+    public Vector<Analyses> return_analises(){
+      return analysesList;
     }
 
     public String return_username(){
