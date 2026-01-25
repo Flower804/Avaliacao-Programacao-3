@@ -87,7 +87,42 @@ public class dados implements Serializable{
   public Vector<Services> return_services(){
     return services;
   }
- 
+  
+  public Vector<Services> return_service_by_tecnico(int NIF){
+    //using NIF because it's going to always be constant and unique so (it would be if the guy responsible for making it unique actually did it)
+    Vector<Services> service_by_tecnico = new Vector<>();
+
+    Iterator<Services> it = services.iterator();
+    while(it.hasNext()){
+      Services it_service = it.next();
+      Technical current_tecnico_inservice = it_service.return_tecnico();
+      if(current_tecnico_inservice.get_NIF() == NIF){
+        service_by_tecnico.add(it_service);
+      }
+    }
+
+    return service_by_tecnico;
+  }
+  
+  public Vector<Services> return_services_by_client(String username){
+    Vector<Services> services_by_user = new Vector<>();
+    
+    //Flower
+    //not sure if they can manage the services they requested (as in the ones that were already accepted) or the services they requested (as in the ones they requested and havent been accepteed)
+    //but it makes more sense if it is the latter
+    //Iterator<Services> it = services.iterator();
+    Iterator<Services> it = service_requests.iterator();
+    while(it.hasNext()){
+      Services it_service = it.next();
+      
+      if((it_service.return_username()).equals(username)){
+        services_by_user.add(it_service);
+      }
+    }
+
+    return services_by_user;
+  }
+
   public Vector<Analyses> return_analises(){
     return analises_existentes;
   }
@@ -123,6 +158,35 @@ public class dados implements Serializable{
     service_requests.add(service);
   }
 
+  public void save_updated_service(Services service, int entrance){
+    int searched_index = -1;
+    Vector<Services> to_search;
+
+    if(entrance == 1){ //entrance came from tecnico 
+      to_search = services; 
+    } else { //entrance came from client 
+      to_search = service_requests; 
+    } 
+    
+    Iterator<Services> it = to_search.iterator();
+    while(it.hasNext()){ 
+      Services searched = it.next(); 
+      int searched_code = searched.get_code();
+
+      if(searched_code == service.get_code()){
+        searched_index = to_search.indexOf(searched);  
+        break;
+      }
+    }
+
+    if(searched_index != -1){
+      to_search.remove(searched_index);
+      to_search.add(service);
+      System.out.println("Servico atualizado com sucesso");
+    } else {
+      System.out.println("Aconeceu um erro a atualizar os dados do servico");
+    }
+  }
 
   public void remove_request(int index){
     user_requests.remove(index);

@@ -97,13 +97,16 @@ public class Main {
     //System.out.println("on clients loop");
     boolean current_run = true;
     while(current_run){
-      System.out.println("O que gostaria de fazer?" + "\n" + "1- executar pedido de servico" + "\n" + "9- sair");
+      System.out.println("O que gostaria de fazer?" + "\n" + "1- executar pedido de servico" + "\n" + "2- gerir pedidos de servico \n9- sair");
       int choice = input.nextInt();
       input.nextLine();
 
       switch(choice){
         case(1):
           current.request_a_service(data, input);
+          break;
+        case(2):
+          current.manage_services(data, input);
           break;
         case(9):
           current_run = false;
@@ -117,7 +120,7 @@ public class Main {
     while(current_run){
       int choice;
       
-      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- Verificar pedidos de servico" + "\n" + "9- exit");
+      System.out.println("what would you like to do: " + "\n" + "1- See sign up requests" + "\n" + "2- Verificar pedidos de servico\n" + "3- manage services" + "9- exit");
       choice = input.nextInt();
       input.nextLine();
 
@@ -128,6 +131,9 @@ public class Main {
         case(2):
           current.accept_requests(data, input);
           //current.associateTecnitians(data, input);
+          break;
+        case(3):
+          current.manage_services(data, input);
           break;
         case(9):
           current_run = false;
@@ -142,7 +148,7 @@ public class Main {
     while(current_run){
       int choice;
 
-      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n2- intruduze data \n3- adicionar area medica \n9- Sair");
+      System.out.println("O que pretende fazer? \n" + "1- Aceitar pedido de Servico de utilizadores \n2- intruduze data \n3- adicionar area medica \n4- manage services \n9- Sair");
       choice = input.nextInt();
       input.nextLine();
 
@@ -155,6 +161,9 @@ public class Main {
           break;
         case(3):
           current.create_medical_area(data, input);
+          break;
+        case(4):
+          current.manage_services(data, input);
           break;
         case(9):
           current_run = false;

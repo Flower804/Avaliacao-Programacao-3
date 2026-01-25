@@ -17,9 +17,9 @@ public class Services implements Serializable{
     private Date dateBeggin; //RG:  This date is the date when service beggin
     private Date conclusionDate; //RG: This date is the service completion date
     private Technical tecnico_responsavel; //Flower
+    private String requesting_user;
 
-
-    public Services(int aCode, float aTotal, String aState){
+    public Services(int aCode, float aTotal, String aState, String requesting_user){
         code = aCode;
         totalServiceValue = aTotal;
         state = aState;
@@ -27,6 +27,7 @@ public class Services implements Serializable{
         conclusionDate = null;
         analysesList = new Vector<>();
         tecnico_responsavel = null; //Flower
+        this.requesting_user = requesting_user; //Flower 
     }
     
     //Flower
@@ -52,11 +53,19 @@ public class Services implements Serializable{
     public float get_totalServiceValue(){
       return totalServiceValue;
     }
-    
+      
+    public String get_status(){
+      return state;
+    }
+
     //Flower
     //like sure I can just return a Tecnico here
     public Technical return_tecnico(){
       return tecnico_responsavel;
+    }
+
+    public String return_username(){
+      return requesting_user;
     }
 
     public void orderAnalyses(){
@@ -64,22 +73,28 @@ public class Services implements Serializable{
     }
    
     //Flower
-    public manage_service(dados data, Scanner input, int edit){
+    //TODO: create a state changer method
+
+    //Flower
+    public void manage_service(dados data, Scanner input, int edit){
       switch(edit){
-        case 1:
-          Vector<Analyses> new_analises = create_array_analises();
+        case(1):
+          Vector<Analyses> new_analises = create_array_analises(data, input);
           break;
-        case 2:
+        case(2):
           System.out.println("indique o novo valor total de analise: ");
           float new_value = input.nextLong();
           input.nextLine();
           set_total_value(new_value);
           break;
+        case(3):
+          //TODO: implement here the state changer method
+          break;
       }
     }
 
     //Flower
-    private Vector<Analyses> create_array_analises(){
+    private Vector<Analyses> create_array_analises(dados data, Scanner input){
       Vector<Analyses> selected_analyses = new Vector<>();
 
       System.out.println("por favor escolha as analises que pretenda adicionar - ou 9 para parar de adicionar");
@@ -96,17 +111,17 @@ public class Services implements Serializable{
       
       if(choice == 9){
         System.out.println("Parou de selecionar analises");
-        return selected_analyses;
       }else{
         Analyses analise = existing_analyses.get(choice);
         selected_analyses.add(analise);
       }
+      return selected_analyses;
     }
 
     //Flower
     //another example of what I've been talking about
     //and bro stop using chatGPT, I can also give you misinformation and I'm beutiful bitch
-    public static void create_Service(dados data, Scanner input){
+    public static void create_Service(dados data, Scanner input, String user_username){
       System.out.println("Por favor insira o codigo do servico");
       int code = input.nextInt();
       input.nextLine();
@@ -119,7 +134,7 @@ public class Services implements Serializable{
       //String estado = input.nextLine();
       String estado = "iniciado";
 
-      Services service = new Services(code, total, estado);
+      Services service = new Services(code, total, estado, user_username);
       //data.add_service(service);
       data.request_service(service);
     }

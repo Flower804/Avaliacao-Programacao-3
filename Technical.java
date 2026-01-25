@@ -2,6 +2,7 @@ package trabalhoprog;
 
 import java.util.Scanner;
 import java.util.Vector;
+import java.util.Iterator;
 
 public class Technical extends Users{
   private int NIF;
@@ -14,6 +15,10 @@ public class Technical extends Users{
     NIF = aNIF;
     cellPhone = aCellPhone;
     household = aHousehold;
+  }
+  
+  public int get_NIF(){
+    return NIF;
   }
 
   public static String create_Tecnico(dados data, Scanner input){
@@ -81,6 +86,36 @@ public class Technical extends Users{
 
       case(9):
         break;
+    }
+  }
+  
+  public void manage_services(dados data, Scanner input){
+    Vector<Services> current_services = data.return_service_by_tecnico(NIF);
+
+    System.out.println("selecione qual servico pertende gerir - ou selecione 9 para sair");
+    Iterator<Services> it = current_services.iterator();
+    int counter = 0;
+    while(it.hasNext()){
+      counter++;
+      Services service = it.next();
+
+      System.out.println("servico n" + counter + "- codigo: " + service.get_code() + " - estado: " + service.get_status());
+    }
+    int choice = input.nextInt();
+    input.nextLine();
+
+    if(choice == 9){
+      System.out.println("escolheu nao gerir nenhum dos seus servicos");
+    } else {
+      Services service = current_services.get(choice);
+
+      System.out.println("O que pretende editar?");
+      System.out.println("1- Lista de analises: " + "[TODO: inserir a lista de analises]" + " 2- valor total de servico " + service.get_totalServiceValue() + " 3- estado" + service.get_status());
+      choice = input.nextInt();
+      input.nextLine();
+
+      service.manage_service(data, input, choice);
+      data.save_updated_service(service, 1);
     }
   }
 
